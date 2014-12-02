@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <title>fileio</title>
+  </head>
+  <body>
+    <input type="file">
+    <script src="./png_path.js"></script>
+    <script>
+      window.onload = function() {
+        
+        var fileInput = document.querySelector('input');
+        
+        fileInput.addEventListener('change', function(e) {
+          var file = e.target.files[0];
+          var reader = new FileReader;
+          reader.readAsArrayBuffer(file);
+          reader.onload = function() {
+            //png_path(INPUT_ARRAY,error(px) diameter(mm) offset(-1) overwrap(0-1) intensity(0-1))
+            var res = png_path(new Uint8Array(reader.result),1.1,0.25,1,0.5,0.5);
+          };
+        }, false);
+      };
+    </script>
+  </body>
+</html>
