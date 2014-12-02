@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<textarea id="text" placeholder="テキストを入力してください。"></textarea><br />
+<button id="btndownload">ファイル作成</button>
+<div id="disp"> </div>
+
+<script type="text/javascript">
+  document.getElementById("btndownload").addEventListener("click", function () {
+
+    var text = document.getElementById("text").value;
+    var blob = new Blob([text]);
+    var a = document.createElement("a");
+    var label = document.createTextNode("ダウンロード");
+    var disp = document.getElementById("disp");
+
+    if (window.URL) {
+      disp.innerHTML = '<a href="' + window.URL.createObjectURL(blob) + '" target="_blank">file</a>';
+    } else if (window.webkitURL) {
+      disp.innerHTML = '<a href="' + window.webkitURL.createObjectURL(blob) + '" target="_blank">ファイルダウンロード</a>';
+    }
+  }, false);
+</script>
+</body>
+</html>
