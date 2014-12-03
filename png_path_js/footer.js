@@ -2,7 +2,7 @@
        if(FS.findObject("/output").contents !== null){
            console.log("Output file ready."); 
            var path = String.fromCharCode.apply(null, Module.ret());
-           console.log(path);
+           // console.log(path);
 
            var path_blob = new Blob([path]);
            document.path_blob = path_blob;
