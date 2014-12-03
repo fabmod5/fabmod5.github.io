@@ -1,3 +1,4 @@
+
  var timerId = setInterval(function(){
        if(FS.findObject("/output").contents != null){
            console.log("Output file ready."); 
