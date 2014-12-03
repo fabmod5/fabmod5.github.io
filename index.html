@@ -15,18 +15,29 @@
           reader.onload = function() {
             //png_path(INPUT_ARRAY,error(px) diameter(mm) offset(-1) overwrap(0-1) intensity(0-1))
             var res = png_path(new Uint8Array(reader.result),1.1,0.25,1,0.5,0.5);
+            document.getElementById("makerml").disabled = false;
           };
         }, false);
 
-        var pathInput = document.getElementById('loadpath');
-        pathInput.addEventListener('change', function(e) {
-          var file = e.target.files[0];
-          var reader = new FileReader;
-          reader.readAsArrayBuffer(file);
-          reader.onload = function() {
-            //path_rml(INPUT_ARRAY,direction(climb:1, conventional:0),speed(mm/s),jog(mm),xmin(mm),ymin(mm))
-            var res = path_rml(new Uint8Array(reader.result),4,1,1,20,20);
-          };
+        // var pathInput = document.getElementById('loadpath');
+        // pathInput.addEventListener('change', function(e) {
+        //   var file = e.target.files[0];
+        //   var reader = new FileReader;
+        //   reader.readAsArrayBuffer(file);
+        //   reader.onload = function() {
+        //     //path_rml(INPUT_ARRAY,direction(climb:1, conventional:0),speed(mm/s),jog(mm),xmin(mm),ymin(mm))
+        //     var res = path_rml(new Uint8Array(reader.result),4,1,1,20,20);
+        //   };
+        // }, false);
+
+        var rmlBtn = document.getElementById('makerml');
+        rmlBtn.addEventListener('click', function(e) {
+            var file_reader = new FileReader();
+            file_reader.onload = function(e){
+                var path_uint8_arr = new Uint8Array(file_reader.result);
+                path_rml(path_uint8_arr,4,1,1,20,20);
+            };
+            file_reader.readAsArrayBuffer(document.path_blob);
         }, false);
 
       };
@@ -34,19 +45,15 @@
   </head>
   <body>
     <h1>PNG - RML converter</h1>
-    <div>
+
         <p>Load PNG</p>
         <input type="file" id="loadpng">
+
+        <p>Make RML
+        <button id="makerml" disabled>make .rml</button>
+        </p>
         <div id="disp"> </div>
-    </div>
-
-    <div>
-        <p>Load PATH</p>
-        <input type="file" id="loadpath">
-        <div id="disp2"> </div>
-    </div>
 
 
-    <!-- <button id="makerml">make .rml</button> -->
   </body>
 </html>
