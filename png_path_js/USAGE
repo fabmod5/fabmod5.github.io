@@ -1,2 +1,3 @@
-png_path(INPUT_ARRAY,error(px) diameter(mm) offset(-1) overwrap(0-1) intensity(0-1))
+original: png_path "Solar.png" "fab_mod_Solar.path" 1.1 0.25 1 0.5 0.5
+js: png_path(INPUT_ARRAY,error(px) diameter(mm) offset(-1) overwrap(0-1) intensity(0-1))
 
