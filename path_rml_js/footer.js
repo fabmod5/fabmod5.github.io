@@ -3,6 +3,8 @@
            console.log("Output file ready."); 
            var rml = String.fromCharCode.apply(null, Module.ret());
            // console.log(rml);
+           var rmlout = document.getElementById('rmloutput');
+           rmlout.innerText = rml
 
            var rml_blob = new Blob([rml]);
            document.rml_blob = rml_blob; 
