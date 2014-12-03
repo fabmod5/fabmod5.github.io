@@ -48,7 +48,7 @@ var drawPath = function(path){
            } else {
             console.log("An error occured. reloading browser in 3 seconds.");
             var stat = document.getElementById("stat");
-            stat.innerHTML = '<p>An error occured. Try another one.</p>';
+            stat.innerHTML = '<p>An error occured. Reduce file size.</p>';
             setTimeout(function(){
                 location.reload()
             },3000);
