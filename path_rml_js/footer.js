@@ -8,12 +8,12 @@
            document.rml_blob = rml_blob; 
            var a = document.createElement("a");
            var label = document.createTextNode("Download");
-           var disp2 = document.getElementById("disp2");
+           var disp = document.getElementById("disp");
 
            if (window.URL) {
-             disp2.innerHTML = '<a href="' + window.URL.createObjectURL(rml_blob) + '" target="_blank">Download .rml file</a>';
+             disp.innerHTML = '<a href="' + window.URL.createObjectURL(rml_blob) + '" target="_blank">Download .rml file</a>';
            } else if (window.webkitURL) {
-             disp2.innerHTML = '<a href="' + window.webkitURL.createObjectURL(rml_blob) + '" target="_blank">Download .rml file</a>';
+             disp.innerHTML = '<a href="' + window.webkitURL.createObjectURL(rml_blob) + '" target="_blank">Download .rml file</a>';
            }
 
            clearInterval(timerId);
