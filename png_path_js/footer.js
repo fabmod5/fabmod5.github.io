@@ -35,8 +35,6 @@ var drawPath = function(path){
            var path_blob = new Blob([path]);
            document.path_blob = path_blob;
 
-           // var stat = document.getElementById("stat");
-           // stat.innerHTML = '<p>Done.</p>';
            
            // var a = document.createElement("a");
            // var label = document.createTextNode("Download");
@@ -48,7 +46,12 @@ var drawPath = function(path){
            //   disp.innerHTML = '<a href="' + window.webkitURL.createObjectURL(path_blob) + '" target="_blank">Download .path file</a>';
            clearInterval(timerId);
            } else {
-            console.log("processing png_path ...");
+            console.log("An error occured. reloading browser in 3 seconds.");
+            var stat = document.getElementById("stat");
+            stat.innerHTML = '<p>An error occured. Try another one.</p>';
+            setTimeout(function(){
+                location.reload()
+            },3000);
            }
     },300);
 
