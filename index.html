@@ -39,21 +39,33 @@
             };
             file_reader.readAsArrayBuffer(document.path_blob);
         }, false);
-
       };
     </script>
+    <style>
+        label {
+            font-size: 14px;
+        }
+    </style>
   </head>
   <body>
     <h1>PNG - RML converter</h1>
 
         <p>Load PNG</p>
         <input type="file" id="loadpng" accept="image/png"/>
+        <hr>
 
         <p>Make RML
         <button id="makerml" disabled>make .rml</button>
         </p>
         <div id="disp"> </div>
+        <hr>
 
+        <p>Send to Raspberry Pi</p>
+        <label>ID</label>
+        <input type="text" name="raspi_id" value="myraspi">
+        <label>Address</label>
+        <input type="text" name="raspi_addr" value="xxx.xxx.xxx.xxx">
+        <button id="send" disabled>send .rml</button>
 
   </body>
 </html>
