@@ -21,7 +21,11 @@
 
            clearInterval(timerId);
          } else {
-           console.log("processing path_rml...");
+           console.log("An error occured. Reloading browser in 3 seconds...");
+           setTimeout(function(){
+                //reload browser
+                location.reload();                
+           },3000);
          }
     },300);
 
