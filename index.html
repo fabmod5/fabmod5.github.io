@@ -54,6 +54,18 @@
                 };
                 file_reader.readAsArrayBuffer(document.path_blob);
             }, false);
+
+            var rmlSend = document.getElementById('sendrml');
+            rmlSend.addEventListener('click', function(e) {
+                console.log("this function is not yet implemented.");
+                // var file_reader = new FileReader();
+                // file_reader.onload = function(e){
+                //     var path_uint8_arr = new Uint8Array(file_reader.result);
+                //     path_rml(path_uint8_arr,4,1,1,20,20);
+                //     document.getElementById("sendrml").disabled = false;
+                // };
+                // file_reader.readAsArrayBuffer(document.path_blob);
+            }, false);
         };
         </script>
         <style>
@@ -124,7 +136,7 @@
                 <label>Address</label>
                 <input type="text" name="raspi_addr" value="xxx.xxx.xxx.xxx">
                 </p>
-                <button id="send" disabled>send .rml</button>
+                <button id="sendrml" disabled>send .rml</button>
             </div>
         </div>
 
