@@ -2,17 +2,13 @@
 <html>
   <head>
     <title>fileio</title>
-  </head>
-  <body>
-    <input type="file">
-    <div id="disp"> </div>
     <script src="./png_path.js"></script>
+    <script src="./path_rml.js"></script>
     <script>
       window.onload = function() {
         
-        var fileInput = document.querySelector('input');
-        
-        fileInput.addEventListener('change', function(e) {
+        var pngInput = document.getElementById('loadpng');
+        pngInput.addEventListener('change', function(e) {
           var file = e.target.files[0];
           var reader = new FileReader;
           reader.readAsArrayBuffer(file);
@@ -21,7 +17,36 @@
             var res = png_path(new Uint8Array(reader.result),1.1,0.25,1,0.5,0.5);
           };
         }, false);
+
+        var pathInput = document.getElementById('loadpath');
+        pathInput.addEventListener('change', function(e) {
+          var file = e.target.files[0];
+          var reader = new FileReader;
+          reader.readAsArrayBuffer(file);
+          reader.onload = function() {
+            //path_rml(INPUT_ARRAY,direction(climb:1, conventional:0),speed(mm/s),jog(mm),xmin(mm),ymin(mm))
+            var res = path_rml(new Uint8Array(reader.result),4,1,1,20,20);
+          };
+        }, false);
+
       };
     </script>
+  </head>
+  <body>
+    <h1>PNG - RML converter</h1>
+    <div>
+        <p>Load PNG</p>
+        <input type="file" id="loadpng">
+        <div id="disp"> </div>
+    </div>
+
+    <div>
+        <p>Load PATH</p>
+        <input type="file" id="loadpath">
+        <div id="disp2"> </div>
+    </div>
+
+
+    <!-- <button id="makerml">make .rml</button> -->
   </body>
 </html>
