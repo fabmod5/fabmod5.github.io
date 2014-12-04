@@ -27,8 +27,13 @@
                 var reader = new FileReader;
                 reader.readAsArrayBuffer(document.png_file);
                 reader.onload = function() {
+                    var error = document.getElementsByName("error")[0].value;
+                    var diameter = document.getElementsByName("diameter")[0].value;
+                    var offset = document.getElementsByName("offset")[0].value;
+                    var overwrap = document.getElementsByName("overwrap")[0].value;
+                    var intensity = document.getElementsByName("intensity")[0].value;
                     //png_path(INPUT_ARRAY,error(px) diameter(mm) offset(-1) overwrap(0-1) intensity(0-1))
-                    var res = png_path(new Uint8Array(reader.result),1.1,0.25,1,0.5,0.5);
+                    var res = png_path(new Uint8Array(reader.result),error,diameter,offset,overwrap,intensity);
                     document.getElementById("makerml").disabled = false;
                 };
             }, false);
@@ -48,8 +53,14 @@
             rmlInput.addEventListener('click', function(e) {
                 var file_reader = new FileReader();
                 file_reader.onload = function(e){
+                    var direction = document.getElementsByName("direction")[0].value;
+                    var speed = document.getElementsByName("speed")[0].value;
+                    var jog = document.getElementsByName("jog")[0].value;
+                    var xmin = document.getElementsByName("xmin")[0].value;
+                    var ymin = document.getElementsByName("ymin")[0].value;
+
                     var path_uint8_arr = new Uint8Array(file_reader.result);
-                    path_rml(path_uint8_arr,4,1,1,20,20);
+                    path_rml(path_uint8_arr,speed,direction,jog,xmin,ymin);
                     document.getElementById("sendrml").disabled = false;
                 };
                 file_reader.readAsArrayBuffer(document.path_blob);
@@ -78,12 +89,12 @@
                 width: 300px;
             }
             #container1 {
-                height:350px;
+                height:520px;
                 clear:both;
             }
             #container2 {
-                height:170px;
-                clear:both;
+                /* height:170px; */
+                /* clear:both; */
             }
             #footer {
                 margin: 30px;
@@ -92,6 +103,9 @@
             #rmloutput{
                 width:250px;
                 height:250px;
+            }
+            .paramInput input{
+                width:50px;
             }
         </style>
     </head>
@@ -103,36 +117,73 @@
                 <p>Load PNG <a href="./fabisp.png" download="fabisp.png">sample</a></p>
                 <p><input type="file" id="loadpng" accept="image/png"/></p>
                 <canvas class="viewer" id="pngview"></canvas>
-            </div>
+
+                <div id="container2">
+                   <p>Send to Raspberry Pi</p>
+                   <p><label>ID</label>
+                   <input type="text" name="raspi_id" value="myraspi">
+                   </p>
+                   <p>
+                   <label>Address</label>
+                   <input type="text" name="raspi_addr" value="xxx.xxx.xxx.xxx">
+                   </p>
+                   <button id="sendrml" disabled>send .rml</button>
+                </div>
+           </div>
 
             <div class="col">
+              <div class="paramInput">
                 <p>Make PATH</p>
-                <p>
                     <button id="makepath" disabled>make .path</button>
                     <span id="stat"></span>
                 </p>
                 <canvas class="viewer" id="pathview"></canvas>
+                    <p>
+                      <label>error(px)</label>
+                      <input type="number" name="error" value=1.1>
+                      <label>diameter(mm)</label>
+                      <input type="number" name="diameter" value=0.25>
+                    </p>
+                    <p>
+                      <label>offset(-1 to fill)</label>
+                      <input type="number" name="offset" value=1>
+                      <label>overwrap(0-1)</label>
+                      <input type="number" name="overwrap" value=0.5>
+                    </p>
+                    <p>
+                      <label>intensity(0-1)</label>
+                      <input type="number" name="intensity" value=0.5>
+                    <p>
+              </div>
             </div>
 
             <div class="col">
+              <div class="paramInput">
                 <p>Make RML</p>
+                    <p>
+                      <label>direction</label>
+                      <select name="direction">
+                        <option value=1 selected="selected">Climb</option>
+                        <option value=0 >Conventional</option>
+                      </select>
+                      <label>speed(mm/s)</label>
+                      <input type="number" name="speed" value=4>
+                    </p>
+                    <p>
+                      <label>jog(mm/s)</label>
+                      <input type="number" name="jog" value=1>
+                      <label>xmin(mm)</label>
+                      <input type="number" name="xmin" value=20>
+                    </p>
+                    <p>
+                      <label>ymin(mm)</label>
+                      <input type="number" name="ymin" value=20>
+                    <p>
                 <p><button id="makerml" disabled>make .rml</button></p>
                 <textarea id="rmloutput"></textarea>
                 <div id="disp"> </div>
             </div>
-        </div>
-        <div id="container2">
-            <div class="col">
-                <p>Send to Raspberry Pi</p>
-                <p><label>ID</label>
-                <input type="text" name="raspi_id" value="myraspi">
-                </p>
-                <p>
-                <label>Address</label>
-                <input type="text" name="raspi_addr" value="xxx.xxx.xxx.xxx">
-                </p>
-                <button id="sendrml" disabled>send .rml</button>
-            </div>
+          </div>
         </div>
 
         <div id="footer">
