@@ -14,9 +14,9 @@
            var disp = document.getElementById("disp");
 
            if (window.URL) {
-             disp.innerHTML = '<a href="' + window.URL.createObjectURL(rml_blob) + '" target="_blank">Download .rml file</a>';
+             disp.innerHTML = '<a href="' + window.URL.createObjectURL(rml_blob) + '" target="_blank" download="convert.rml">Download .rml file</a>';
            } else if (window.webkitURL) {
-             disp.innerHTML = '<a href="' + window.webkitURL.createObjectURL(rml_blob) + '" target="_blank">Download .rml file</a>';
+             disp.innerHTML = '<a href="' + window.webkitURL.createObjectURL(rml_blob) + '" target="_blank" download="convert.rml">Download .rml file</a>';
            }
 
            clearInterval(timerId);
