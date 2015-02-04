@@ -69,10 +69,10 @@
 
             var rmlSend = document.getElementById('sendrml');
             rmlSend.addEventListener('click', function(e) {
-                // console.log("this function is not yet implemented.");
                 var rmldata = document.querySelector("#rmloutput").innerHTML
-                console.log(rmldata)  
-                // sendRmlToRpi();
+                sendRmlToRpi(rmldata);
+                // console.log(rmldata)  
+                // console.log("this function is not yet implemented.");
                 // var file_reader = new FileReader();
                 // file_reader.onload = function(e){
                 //     var path_uint8_arr = new Uint8Array(file_reader.result);
@@ -82,18 +82,21 @@
                 // file_reader.readAsArrayBuffer(document.path_blob);
             }, false);
 
-            var sendRmlToRpi = function(){
+            var sendRmlToRpi = function(rmldata){
+              // rmljson  = JSON.stringify('{rml:'+rmldata+'}');
+              // rmljson  = JSON.stringify('{rml:hoge}');
               $.ajax({
                   type: 'POST',
                   url: 'http://133.242.160.150:8000/mozpi/',
-                  crossDomain: true,
-                  data: '{"rml":}',
-                  dataType: 'json',
-                  success: function(responseData, textStatus, jqXHR) {
-                      console.log("rml sent.");
+                  // data: rmljson,
+                  dataType: 'jsonp',
+                  data: {
+                        rml: rmldata
+                       // rml: JSON.stringify(rmldata)
+                       // rml: "PU1.0,2.0;H;"
                   },
-                  error: function (responseData, textStatus, errorThrown) {
-                      console.log('POST failed.');
+                  success: function(){
+                    console.log("success");
                   }
               });
             };
@@ -140,13 +143,13 @@
 
                 <div id="container2">
                    <p>Send to Modela</p>
-                   <p><label>ID</label>
-                   <input type="text" name="modela_id" value="mymodela">
-                   </p>
-                   <p>
-                   <label>Address</label>
-                   <input type="text" name="modela_addr" value="xxx.xxx.xxx.xxx">
-                   </p>
+                   <!-- <p><label>ID</label> -->
+                   <!-- <input type="text" name="modela_id" value="mymodela"> -->
+                   <!-- </p> -->
+                   <!-- <p> -->
+                   <!-- <label>Address</label> -->
+                   <!-- <input type="text" name="modela_addr" value="xxx.xxx.xxx.xxx"> -->
+                   <!-- </p> -->
                    <button id="sendrml" disabled>send .rml</button>
                 </div>
            </div>
