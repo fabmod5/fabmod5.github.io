@@ -4,6 +4,7 @@
         <title>fab modules</title>
         <script src="./png_path.js"></script>
         <script src="./path_rml.js"></script>
+        <script src="./bower_components/jquery/dist/jquery.min.js"></script>
         <script>
         window.onload = function() {
 
@@ -68,7 +69,10 @@
 
             var rmlSend = document.getElementById('sendrml');
             rmlSend.addEventListener('click', function(e) {
-                console.log("this function is not yet implemented.");
+                // console.log("this function is not yet implemented.");
+                var rmldata = document.querySelector("#rmloutput").innerHTML
+                console.log(rmldata)  
+                // sendRmlToRpi();
                 // var file_reader = new FileReader();
                 // file_reader.onload = function(e){
                 //     var path_uint8_arr = new Uint8Array(file_reader.result);
@@ -77,6 +81,22 @@
                 // };
                 // file_reader.readAsArrayBuffer(document.path_blob);
             }, false);
+
+            var sendRmlToRpi = function(){
+              $.ajax({
+                  type: 'POST',
+                  url: 'http://133.242.160.150:8000/mozpi/',
+                  crossDomain: true,
+                  data: '{"rml":}',
+                  dataType: 'json',
+                  success: function(responseData, textStatus, jqXHR) {
+                      console.log("rml sent.");
+                  },
+                  error: function (responseData, textStatus, errorThrown) {
+                      console.log('POST failed.');
+                  }
+              });
+            };
         };
         </script>
         <style>
