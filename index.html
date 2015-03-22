@@ -86,10 +86,13 @@
             var sendRmlToRpi = function(rmldata){
               // rmljson  = JSON.stringify('{rml:'+rmldata+'}');
               // rmljson  = JSON.stringify('{rml:hoge}');
-              console.log(rmldata)  
+              console.log(rmldata);
+              var mip = document.getElementById("modela_ip");
+              var mport = document.getElementById("modela_port");
+              var murl = 'http://'+mip+':'+mport;
               $.ajax({
                   type: 'POST',
-                  url: 'http://192.168.100.104:8080',
+                  url: murl,
                   // data: rmljson,
                   dataType: 'text',
                   data: {
@@ -165,11 +168,11 @@
                 <div id="container2">
                    <p>Send to Modela</p>
                    <p><label>IP address</label>
-                   <input type="text" name="modela_ip" value="192.168.100.104">
+                   <input type="text" id="modela_ip" value="192.168.100.104">
                    </p>
                    <p>
                    <label>port</label>
-                   <input type="text" name="modela_port" value="8080">
+                   <input type="text" id="modela_port" value="8080">
                    </p>
                    <button id="sendrml" disabled>send .rml</button>
                    <p>Websocket
