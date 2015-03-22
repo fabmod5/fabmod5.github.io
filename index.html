@@ -107,6 +107,9 @@
             };
 
             var ws_relay = new WebSocket("ws://133.242.160.150:9090/ws");
+            if(ws_relay){
+                
+            }
             ws_relay.onopen = function() {
                 console.log("websocket opened");
             };
@@ -175,9 +178,8 @@
                    <input type="text" id="modela_port" value="8080">
                    </p>
                    <button id="sendrml" disabled>send .rml</button>
-                   <p>Websocket
+                   <p>Websocket</p><span>: Relay server is down</span>
                      <button id="sendrml-ws" disabled>send .rml</button>
-                   </p>
                 </div>
            </div>
 
