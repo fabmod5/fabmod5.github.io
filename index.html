@@ -63,6 +63,7 @@
                     var path_uint8_arr = new Uint8Array(file_reader.result);
                     path_rml(path_uint8_arr,speed,direction,jog,xmin,ymin);
                     document.getElementById("sendrml").disabled = false;
+                    document.getElementById("sendrml-ws").disabled = false;
                 };
                 file_reader.readAsArrayBuffer(document.path_blob);
             }, false);
@@ -101,6 +102,25 @@
                   }
               });
             };
+
+            var ws_relay = new WebSocket("ws://133.242.160.150:9090/ws");
+            ws_relay.onopen = function() {
+                console.log("websocket opened");
+            };
+            ws_relay.onmessage = function (evt) {
+               console.log("data received: "+evt.data);
+            };
+            var sendrml_ws = document.getElementById("sendrml-ws");
+            sendrml_ws.addEventListener('click',function(e){
+                console.log("send rml");
+                var rmldata = document.querySelector("#rmloutput").innerHTML
+                // ws_relay.send("rml text here");
+                ws_relay.send(rmldata);
+            });
+            ws_relay.onclose = function(){
+                console.log("websocket closed");
+            }
+
         };
         </script>
         <style>
@@ -152,6 +172,9 @@
                    <input type="text" name="modela_port" value="8080">
                    </p>
                    <button id="sendrml" disabled>send .rml</button>
+                   <p>Websocket
+                     <button id="sendrml-ws" disabled>send .rml</button>
+                   </p>
                 </div>
            </div>
 
