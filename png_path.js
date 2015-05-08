@@ -37,22 +37,23 @@ var sb=[Gg,Yb,Gf,Pf];var tb=[Hg,Ig,Zb,Hf];var ub=[Jg,ac,xd,Jg];var vb=[Kg,Id,Te,
 
 var drawPath = function(path){
     var canvas = document.getElementById('pathview');
+    // var canvas = document.getElementById('pngview');
     var ctx = canvas.getContext( "2d" );
     var px,py,cx,cy = 0;
-    function drawLine(cx,cy,px,py){
-           ctx.beginPath();
-           ctx.moveTo( px, py);
-           ctx.lineTo( cx, cy);
-           ctx.closePath();
-           ctx.stroke();
+    function drawLine(ccx,cx,cy,px,py){
+        ccx.beginPath();
+        ccx.moveTo( px, py);
+        ccx.lineTo( cx, cy);
+        ccx.closePath();
+        ccx.stroke();
     }
     var arr = path.split('\n');
     for (var i = 0; i < arr.length; i++) { 
       if(arr[i].match(/^\d/)!=null) {
         var coords = arr[i];
-        cx = coords.split(' ')[0]/3.5;
-        cy = coords.split(' ')[1]/3.5;
-        drawLine(cx,cy,px,py)
+        cx = coords.split(' ')[0];
+        cy = coords.split(' ')[1];
+        drawLine(ctx,cx,cy,px,py)
         px = cx;
         py = cy;
       }

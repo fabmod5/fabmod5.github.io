@@ -6,7 +6,9 @@
         <script src="./path_rml.js"></script>
         <script src="./bower_components/jquery/dist/jquery.min.js"></script>
         <script>
-        window.onload = function() {
+          var img;
+
+          window.onload = function() {
 
             var canvas = document.getElementById('pngview');
             document.ctx = canvas.getContext('2d');
@@ -15,10 +17,10 @@
             pngInput.addEventListener('change', function(e) {
                 document.png_file = e.target.files[0];
                 document.png_url = URL.createObjectURL(document.png_file);
-                var img = new Image();
+                img = new Image();
                 img.src = document.png_url;
                 img.onload = function(){
-                    document.ctx.drawImage(img, 0, 0, 250, 250 * img.height/ img.width);
+                    document.ctx.drawImage(img, 0, 0, img.width,img.height);
                 }
                 document.getElementById("makepath").disabled = false;
             }, false);
@@ -168,7 +170,10 @@
             <div class="col">
                 <p>Load PNG <a href="./fabisp.png" download="fabisp.png">sample</a></p>
                 <p><input type="file" id="loadpng" accept="image/png"/></p>
-                <canvas class="viewer" id="pngview"></canvas>
+                <div id="canvas_wrapper">
+                  <canvas class="viewer" id="pngview"></canvas>
+                  <canvas class="viewer" id="pathview"></canvas>
+                </div>
 
                 <div id="container2">
                    <p>Send to Modela</p>
@@ -191,7 +196,6 @@
                     <button id="makepath" disabled>make .path</button>
                     <span id="stat"></span>
                 </p>
-                <canvas class="viewer" id="pathview"></canvas>
                     <p>
                       <label>error(px)</label>
                       <input type="number" name="error" value=1.1>
