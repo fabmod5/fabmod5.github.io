@@ -1,32 +1,80 @@
+/* GLOBAL DESIGN */
+@import url(http://fonts.googleapis.com/css?family=Roboto:200,300,400,500,400italic);
 * {
-    font-family : YuGothic, '游ゴシック', sans-serif;
+  font-family : 'Roboto', YuGothic, '游ゴシック', sans-serif;
 }
+html, body {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 16px;
+  line-height: 160%;
+}
+body {
+  height: auto;
+  overflow: hidden;
+}
+h1 {
+  font-size: 1.3em;
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+h2 {
+  font-size: 1.2em;
+  font-size: 1.2rem;
+  margin-top: 1em;
+  margin-top: 1rem;
+  margin-bottom: 0.3em;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+h3 {
+  font-size: 1.1em;
+  font-size: 1.1rem;
+  margin-top: 0.8em;
+  margin-top: 0.8rem;
+  margin-bottom: 0.4em;
+  margin-bottom: 0.4rem;
+  font-weight: 400;
+  clear: both;
+  display: inline-block;
+  padding: 0 0 0.1em;
+  padding: 0 0 0.1rem;
+  border-bottom: 2px solid black;
+}
+h3:first-child {
+  margin-top: 0;
+}
+p {
+  margin: 0;
+  font-weight: 200;
+}
+
+/* DIV LAYOUT */
 .stage {
     margin-left:20px;
     float:left;
     width: 280px;
 }
-#footer {
-    margin: 30px;
-}
-
-#rmloutput{
-    width:250px;
-    height:250px;
-}
-
-/* INPUTS */
 .params {
   height: auto;
   overflow: hidden;
+  margin-top: 0.8em;
+  margin-top: 0.8rem;
 }
+.params:first-child {
+  margin-top: 0;
+}
+
+/* INPUTS */
 .params .param {
   display: inline-block;
   height: auto;
   width: 100%;
   overflow: hidden;
-  margin: 0.1em 0 0;
-  margin: 0.1rem 0 0;
+  margin: 0.3em 0 0;
+  margin: 0.3rem 0 0;
   vertical-align: middle;
 }
 .params .param:first-child {
@@ -36,49 +84,73 @@
   font-size: 0.9em;
   font-size: 0.9rem;
 }
-.params label {
-  width: 60%;
-  line-height: 1.1em;
-  line-height: 1.1rem;
-  padding: 0.2em;
-  padding: 0.2rem;
+label {
+  vertical-align: middle;
+  padding: 0.2em 0;
+  padding: 0.2rem 0;
   margin: 1px 0;
 }
-.params input, .params select {
+input[type=number], input[type=text], select, textarea {
   vertical-align: middle;
   box-sizing: content-box;
-  width: 30%;
   padding: 0.2em 0.5em;
   padding: 0.2rem 0.5rem;
-  border: 1px solid #BDBEC2;
-  float: right;
+  border: 1.5px solid #BDBEC2;
+  border-radius: 0.1em;
+  border-radius: 0.1rem;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
-.params input:focus {
-  border: 1px solid #8e8e93;
+input[type=number]:focus,
+input[type=text]:focus,
+select:focus,
+textarea:focus {
+  border: 1px solid #5bcaff;
+  -webkit-box-shadow: inset 0px 0px 2px 0px rgba(91,202,255,0.7);
+  -moz-box-shadow:    inset 0px 0px 2px 0px rgba(91,202,255,0.7);
+  box-shadow:         inset 0px 0px 2px 0px rgba(91,202,255,0.7);
 }
 button {
   font-size: 1em;
   font-size: 1rem;
   line-height: 100%;
+  text-align: center;
   display: inline-block;
-  border: 0;
-  border-radius: 0.2em;
-  border-radius: 0.2rem;
-  display: inline-block;
-  margin-top: 1.0em;
-  margin-top: 1.0rem;
+  width: 100%;
+  margin-top: 0.5em;
+  margin-top: 0.5rem;
   padding: 0.6em;
-  padding: 0.6rem
+  padding: 0.6rem;
+  border: 0;
+  border-radius: 0.1em;
+  border-radius: 0.1rem;
   cursor: pointer;
-  -moz-transition: all 0.3s;
+  -moz-transition:    all 0.3s;
   -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  transition: all 0.3s;
+  -o-transition:      all 0.3s;
+  -ms-transition:     all 0.3s;
+  transition:         all 0.3s;
   float: right;
 }
 button:hover, button:active {
   opacity: 0.7;
+}
+.params label {
+  line-height: 160%;
+  width: 60%;
+}
+.long_input label {
+  width: 45%;
+}
+.params input, .params select {
+  line-height: 160%;
+  width: 30%;
+  float: right;
+}
+.long_input input,
+.long_input select {
+  width: 45%;
+  text-align: right;
 }
 button.calculate {
   background-color: #007aff;
@@ -87,6 +159,19 @@ button.calculate {
 button.process {
   background-color: #ff2d55;
   color: white;
+}
+/* DEV */
+/* 
+ *  input[disabled], button[disabled] {
+ *    background:#DCDCDC;
+ *    cursor:not-allowed;
+ *  }
+ */
+
+/* OUTPUTS */
+#rmloutput{
+    width:250px;
+    height:250px;
 }
 
 /* CANVAS */
