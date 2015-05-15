@@ -1,4 +1,7 @@
 window.onload = function() {
+  /* sidebar */
+  sidebar("#menu_wrapper", "#menu_button", "left");
+
      var canvas = document.getElementById('pngview');
      var canvas_s = document.getElementById('pathview');
  
@@ -128,3 +131,26 @@ window.onload = function() {
      }
 
 };
+
+function sidebar(menu_wrapper, button, lr, mask_name = "menu-mask") {
+  $('body').prepend('<div id="'+mask_name+'" class="hidden-mask"></div>');
+  menu = $(menu_wrapper);
+  mask = $('#' + mask_name);
+  menu.attr('menuOpen','closed');
+  $(mask).click(function() {
+    menu.removeAttr('style');
+    menu.attr('menuOpen','closed');
+    $(this).addClass('hidden-mask');
+  });
+  $(button).click(function() {
+    if (menu.attr('menuOpen') == 'open'){
+      menu.removeAttr('style');
+      menu.attr('menuOpen','closed');
+      $(mask).addClass('hidden-mask');
+    } else {
+      menu.css(lr,0);
+      menu.attr('menuOpen','open');
+      $(mask).removeClass('hidden-mask');
+    }
+  });
+}
