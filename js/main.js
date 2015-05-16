@@ -1,6 +1,6 @@
 window.onload = function() {
   /* sidebar */
-  sidebar("#menu_wrapper", "#menu_button", "left");
+  sidebar("#menu_wrapper", "#menu_button", {leftRight: "left"});
 
      var canvas = document.getElementById('pngview');
      var canvas_s = document.getElementById('pathview');
@@ -132,10 +132,17 @@ window.onload = function() {
 
 };
 
-function sidebar(menu_wrapper, button, lr, mask_name = "menu-mask") {
-  $('body').prepend('<div id="'+mask_name+'" class="hidden-mask"></div>');
+function sidebar(menu_wrapper, button, args) {
+  if (typeof args["mask_name"] == 'undefined') {
+    args["mask_name"] = "menu-mask";
+  }
+  if (typeof args["leftRight"] == 'undefined') {
+    args["leftRight"] = "left";
+  }
+  
+  $('body').prepend('<div id="'+args["mask_name"]+'" class="hidden-mask"></div>');
   menu = $(menu_wrapper);
-  mask = $('#' + mask_name);
+  mask = $('#' + args["mask_name"]);
   menu.attr('menuOpen','closed');
   $(mask).click(function() {
     menu.removeAttr('style');
@@ -148,7 +155,7 @@ function sidebar(menu_wrapper, button, lr, mask_name = "menu-mask") {
       menu.attr('menuOpen','closed');
       $(mask).addClass('hidden-mask');
     } else {
-      menu.css(lr,0);
+      menu.css(args["leftRight"],0);
       menu.attr('menuOpen','open');
       $(mask).removeClass('hidden-mask');
     }
