@@ -1,7 +1,9 @@
 /* GLOBAL DESIGN */
+@import url(http://fonts.googleapis.com/css?family=RobotoDraft:200,300,400,500,400italic);
 @import url(http://fonts.googleapis.com/css?family=Roboto:200,300,400,500,400italic);
+
 * {
-  font-family : 'Roboto', YuGothic, '游ゴシック', sans-serif;
+  font-family : 'RobotoDraft', 'Roboto', YuGothic, '游ゴシック', sans-serif;
 }
 html, body, div, span, h1, h2, h3, h4, h5, h6, p {
   margin: 0;
@@ -22,13 +24,13 @@ h1 {
 h2 {
   font-size: 1.2rem;
   margin-bottom: 0.6rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 h3 {
   font-size: 1.1rem;
   margin-top: 0.8rem;
   margin-bottom: 0.4rem;
-  font-weight: 500;
+  font-weight: 400;
   clear: both;
   display: inline-block;
   padding: 0 0 0.1rem;
@@ -38,7 +40,10 @@ h3:first-child {
   margin-top: 0;
 }
 input, select, label, span, p, a {
-  font-weight: 300;
+  font-weight: 400;
+}
+img {
+  fill: white;
 }
 
 /* MATERIAL DESIGN */
@@ -55,11 +60,12 @@ input, select, label, span, p, a {
 /* DIV LAYOUT */
 #header {
   position: fixed;
-  background-color: #333333;
+  /* Blue Gray 500 */
+  background-color: #607d8b;
+  color: white;
   height: 50px;
   width: 100%;
   overflow: hidden;
-  color: white;
   top: 0;
   left: 0;
 }
@@ -68,10 +74,24 @@ input, select, label, span, p, a {
   line-height: 50px;
   vertical-align: middle;
 }
+#menu_wrapper {
+  width: 280px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: -280px;
+  z-index: 200;
+  /* Blue Gray 200 */
+  background-color: #B0BEC5;
+  -moz-transition:    all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition:      all 0.3s ease-in-out;
+  -ms-transition:     all 0.3s ease-in-out;
+  transition:         all 0.3s ease-in-out;
+}
 #menu_button {
   height: 50px;
-  width: 40px;
-  padding: 0 5px;
+  width: 50px;
   display: block;
   float: right;
   margin-right: -50px;
@@ -83,34 +103,21 @@ input, select, label, span, p, a {
   transition:         all 0.3s ease-in-out;
 }
 #menu_button:hover {
-  background-color: #555555;
+  /* Blue Gray 200 */
+  background-color: #B0BEC5;
 }
 #menu_button img {
   height: 30px;
   width: auto;
-  margin: 10px auto;
-}
-#menu_wrapper {
-  width: 280px;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: -280px;
-  z-index: 200;
-  background-color: black;
-  -moz-transition:    all 0.5s ease-in-out;
-  -webkit-transition: all 0.5s ease-in-out;
-  -o-transition:      all 0.5s ease-in-out;
-  -ms-transition:     all 0.5s ease-in-out;
-  transition:         all 0.5s ease-in-out;
+  margin: 10px;
 }
 
 #content_wrapper {
   margin-top: 50px;
   height: auto;
   overflow: hidden;
-  /* background-color: #E1E9E6; */
-  background-color: #E8E8E8;
+  /* Blue Gray 50 */
+  background-color: #ECEFF1;
 }
 .panel {
   /* DEV */
