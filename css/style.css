@@ -42,18 +42,32 @@ h3:first-child {
 input, select, label, span, p, a {
   font-weight: 400;
 }
-img {
+svg path {
   fill: white;
+  stroke: white;
+}
+p.sub_text {
+  font-size: 0.8em;
+  line-height: 120%;
 }
 
 /* MATERIAL DESIGN */
 #header {
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
-.panel {
+.panel, 
+.machine_block {
+  background-color: white;
+  border-radius: 0.1rem;
+  -moz-transition:    all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition:      all 0.3s ease-in-out;
+  -ms-transition:     all 0.3s ease-in-out;
+  transition:         all 0.3s ease-in-out;
   box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.08);
 }
-.panel:hover {
+.panel:hover, 
+.machine_block:hover {
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -89,6 +103,38 @@ img {
   -ms-transition:     all 0.3s ease-in-out;
   transition:         all 0.3s ease-in-out;
 }
+.machine_block {
+  display: inline-block;
+  height: auto;
+  width: 105px;
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 10px;
+  overflow: hidden;
+  float: left;
+  cursor: pointer;
+  text-align: center;
+}
+.machine_block p {
+  color: #666666;
+  height: 1.6em;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.machine_block p.sub_text {
+  color: #999999;
+  height: 1.2em;
+}
+.machine_block img,
+.machine_block svg {
+  height: 100px;
+  width: 100px;
+}
+.machine_block svg path {
+  fill: #666666;
+}
 #menu_button {
   height: 50px;
   width: 50px;
@@ -106,7 +152,8 @@ img {
   /* Blue Gray 200 */
   background-color: #B0BEC5;
 }
-#menu_button img {
+#menu_button img,
+#menu_button svg {
   height: 30px;
   width: auto;
   margin: 10px;
@@ -128,13 +175,6 @@ img {
   height: auto;
   overflow: hidden;
   padding: 0.6rem;
-  border-radius: 0.1rem;
-  background-color: white;
-  -moz-transition:    all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition:      all 0.3s ease-in-out;
-  -ms-transition:     all 0.3s ease-in-out;
-  transition:         all 0.3s ease-in-out;
 }
 .params {
   height: auto;

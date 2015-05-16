@@ -2,6 +2,8 @@ window.onload = function() {
   /* sidebar */
   sidebar("#menu_wrapper", "#menu_button", {leftRight: "left"});
 
+  replaceSvg();
+
      var canvas = document.getElementById('pngview');
      var canvas_s = document.getElementById('pathview');
  
@@ -159,5 +161,26 @@ function sidebar(menu_wrapper, button, args) {
       menu.attr('menuOpen','open');
       $(mask).removeClass('hidden-mask');
     }
+  });
+}
+
+function replaceSvg() {
+  jQuery('img.svg').each(function(){
+    var $img = jQuery(this);
+    var imgID = $img.attr('id');
+    var imgClass = $img.attr('class');
+    var imgURL = $img.attr('src');
+
+    jQuery.get(imgURL, function(data) {
+      var $svg = jQuery(data).find('svg');
+      if(typeof imgID !== 'undefined') {
+        $svg = $svg.attr('id', imgID);
+      }
+      if(typeof imgClass !== 'undefined') {
+        $svg = $svg.attr('class', imgClass+' replaced-svg');
+      }
+      $svg = $svg.removeAttr('xmlns:a');
+      $img.replaceWith($svg);
+    }, 'xml');
   });
 }
