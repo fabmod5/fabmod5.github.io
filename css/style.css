@@ -391,6 +391,10 @@ button svg {
   position: absolute;
   bottom: -21px;
   right: 8px;
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.36);
+}
+.params_title button:hover {
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.45);
 }
 .params label {
   line-height: 160%;
@@ -443,15 +447,21 @@ input[disabled], button[disabled] {
   width: 50%;
   left: auto;
   right: 0;
+  /* Pink A100 */
+  background-color: #ff80ab;
+}
+#file_download_link:hover {
   /* Pink A200 */
   background-color: #ff4081;
 }
-#file_download_link:hover {
-  /* Pink A400 */
-  background-color: #f50057;
-}
 #file_download_link p {
   text-align: center;
+}
+
+#viewer {
+  height: 100%;
+  width: 100%;
+  margin-right: -320px;
 }
 
 /* CANVAS */
@@ -462,11 +472,10 @@ input[disabled], button[disabled] {
 }
 canvas {
   position: absolute;
-  top: 0;
-  left: 0;
-}
-canvas:first-child {
-  position: relative;
+  top: 50%;
+  left: 50%;
+  margin-left: 0;
+  margin-top: 0;
 }
 
 .status {

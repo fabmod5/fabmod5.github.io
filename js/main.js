@@ -32,6 +32,7 @@ window.onload = function() {
           canvas_s.setAttribute("width", img.width + "px"); canvas_s.setAttribute("height", img.height + "px");
           document.ctx = canvas.getContext('2d');
           document.ctx.drawImage(img, 0, 0, img.width,img.height);
+          resizeCanvas();
       }
       document.getElementById("makepath").disabled = false;
       document.getElementById("filename").innerHTML = document.png_file.name;
@@ -202,5 +203,32 @@ function slidePanel(forward) {
 }
 
 function drawView() {
-  $('#panel_sidebar').height($(window).height() - $('#header').height());
+  content_height = $(window).height() - $('#header').height();
+  $('#panel_sidebar').height(content_height);
+  $('#canvas_wrapper').height(content_height);
+  if (typeof $('#canvas_wrapper canvas:first-child').attr("width") !== 'undefined') {
+    resizeCanvas();
+  }
+}
+
+function resizeCanvas() {
+  var offset = 30;
+
+  content_height = $('#canvas_wrapper').height();
+  content_width = $('#canvas_wrapper').width();
+  img_aspect = $('#canvas_wrapper canvas:first-child').width() / $('#canvas_wrapper canvas:first-child').height();
+  img_width = 0; img_height = 0;
+  if (content_height * img_aspect >= content_width) {
+    img_width = content_width - offset * 2;
+    img_height = img_width / img_aspect;
+  } else {
+    img_height = content_height - offset * 2;
+    img_width = img_height * img_aspect;
+  }
+  $('#canvas_wrapper canvas').css({
+    "width": img_width,
+    "height": img_height,
+    "margin-left": -img_width/2,
+    "margin-top": -img_height/2
+  });
 }
