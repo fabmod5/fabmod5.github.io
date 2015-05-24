@@ -265,7 +265,6 @@ p.sub_text {
 }
 .panel .params_bottom_button {
   position: absolute;
-  left: 0;
   bottom: 0;
   display: inline-block;
   cursor: pointer;
@@ -283,20 +282,17 @@ p.sub_text {
 .panel .params_bottom_button img {
   vertical-align: middle;
   margin-right: 0.6rem;
+  height: 24px;
+  width: 24px;
 }
 .panel .params_title_back {
   width: 50%;
-  /* Teal #200 */
-  background-color: #80cbc4;
+  /* Teal #100 */
+  background-color: #b2dfdb;
 }
 .panel .params_title_back:hover {
-  /* Teal #300 */
-  background-color: #4db6ac;
-}
-.panel .params_title_back svg,
-.panel .params_title_back img {
-  height: 24px;
-  width: 24px;
+  /* Teal #200 */
+  background-color: #80cbc4;
 }
 .panel .params_title_back svg path {
   fill: black;
@@ -444,7 +440,9 @@ input[disabled], button[disabled] {
   height:250px;
 }
 #file_download_link {
-  width: 100%;
+  width: 50%;
+  left: auto;
+  right: 0;
   /* Pink A200 */
   background-color: #ff4081;
 }
@@ -454,9 +452,6 @@ input[disabled], button[disabled] {
 }
 #file_download_link p {
   text-align: center;
-}
-#file_download_link img {
-  height: 32px;
 }
 
 /* CANVAS */
