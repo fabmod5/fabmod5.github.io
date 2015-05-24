@@ -17,12 +17,7 @@
   </head>
   <body>
     <div id="header">
-      <h1>
-        Fab modules for SFC*SFC
-      </h1>
-      <div id="machine_settings" class="user_button">
-        <img src="img/svg/ic_settings_48px.svg" class="svg" />
-      </div>
+      <h1>Fabmodules</h1>
     </div><!-- div#header -->
 
     <div id="menu_wrapper">
@@ -32,6 +27,15 @@
           <img src="img/svg/ic_arrow_back_48px.svg" class="svg menu_close_button" />
         </div>
       </div><!-- #menu_button -->
+      <div id="current_machine_block">
+        <img src="img/sample/3Dprinter.JPG" />
+        <div id="machine_settings" class="user_button">
+          <img src="img/svg/ic_settings_48px.svg" class="svg" />
+        </div>
+        <div class="machine_caption">
+          <p class="machine_name">MDX-15</p>
+        </div>
+      </div><!-- div.machine_block -->
       <div id="machine_list">
         <div class="machine_block">
           <img src="img/svg/ic_desktop_mac_48px.svg" class="svg" />
@@ -65,139 +69,175 @@
     </div><!-- div#menu_wrapper -->
 
     <div id="content_wrapper">
-      <div class="panel">
-        <h2>Load PNG </h2>
-        <div class="input">
-          <p><a href="./fabisp.png" download="fabisp.png">sample</a></p>
-          <p><input type="file" id="loadpng" accept="image/png"/>
-            <span id="filename"></span>
-          </p>
-        </div><!-- div.input -->
-      </div><!-- div.panel -->
+      <div id="panel_sidebar">
+        <div id="panel_wrapper">
+          <div class="panel">
+            <div class="params_title">
+              <h2>Load PNG</h2>
+            </div><!-- div.params_title -->
+            <div class="inputs_wrapper">
+              <div class="input">
+                <p class="sample_data"><a href="./fabisp.png" download="fabisp.png">VIEW SAMPLE</a></p>
+                <p>
+                  <input type="file" id="loadpng" accept="image/png"/>
+                </p>
+                <p>
+                  <img id="file_preview" /><br/>
+                  <span id="filename"></span>
+                </p>
+              </div><!-- div.input -->
+            </div><!-- div.inputs_wrapper -->
+          </div><!-- div.panel -->
 
-      <div class="panel">
-        <h2>Make PATH</h2>
-        <div class="params_wrapper">
-          <div class="params">
-            <span class="param">
-              <label for="make_path_error">Error (px)</label>
-              <input type="number" id="make_path_error" name="error" value=1.1>
-            </span><!-- span.param -->
+          <div class="panel">
+            <div class="params_title">
+              <h2>Make PATH</h2>
+              <button id="makepath" class="calculate" alt="Make Path" disabled>
+                <img src="img/svg/ic_play_arrow_48px.svg" class="" />
+              </button>
+            </div>
+            <div class="params_wrapper">
+              <div class="params">
+                <span class="param">
+                  <label for="make_path_error">Error (px)</label>
+                  <input type="number" id="make_path_error" name="error" value=1.1>
+                </span><!-- span.param -->
 
-            <span class="param">
-              <label for="make_path_diameter">Diameter (mm)</label>
-              <input type="number" id="make_path_diameter" name="diameter" value=0.25>
-            </span><!-- span.param -->
+                <span class="param">
+                  <label for="make_path_diameter">Diameter (mm)</label>
+                  <input type="number" id="make_path_diameter" name="diameter" value=0.25>
+                </span><!-- span.param -->
 
-            <span class="param">
-              <label for="make_path_offset">Offset (-1 to fill)</label>
-              <input type="number" id="make_path_offset" name="offset" value=1>
-            </span><!-- span.param -->
+                <span class="param">
+                  <label for="make_path_offset">Offset (-1 to fill)</label>
+                  <input type="number" id="make_path_offset" name="offset" value=1>
+                </span><!-- span.param -->
 
-            <span class="param">
-              <label for="make_path_overlap">Overlap (0-1)</label>
-              <input type="number" id="make_path_overlap" name="overlap" value=0.5>
-            </span><!-- span.param -->
+                <span class="param">
+                  <label for="make_path_overlap">Overlap (0-1)</label>
+                  <input type="number" id="make_path_overlap" name="overlap" value=0.5>
+                </span><!-- span.param -->
 
-            <span class="param">
-              <label for="make_path_intensity">Intensity (0-1)</label>
-              <input type="number" id="make_path_intensity" name="intensity" value=0.5>
-            </span><!-- span.param -->
+                <span class="param">
+                  <label for="make_path_intensity">Intensity (0-1)</label>
+                  <input type="number" id="make_path_intensity" name="intensity" value=0.5>
+                </span><!-- span.param -->
 
-            <button id="makepath" class="calculate" disabled>Make .Path</button>
-          </div><!-- div.params -->
-        </div><!-- div.params_wrapper -->
-      </div><!-- div.panel -->
-
-      <div class="panel">
-        <h2>Make RML</h2>
-        <div class="params_wrapper">
-          <div class="params">
-            <h3>Milling Preferences</h3>
-            <span class="param long_input">
-              <label for="make_rml_direction">Direction</label>
-              <select id="make_rml_direction" name="direction">
-                <option value=1 selected="selected">CLIMB</option>
-                <option value=0>CONVENTIONAL</option>
-              </select>
+              </div><!-- div.params -->
+            </div><!-- div.params_wrapper -->
+            <span class="params_title_back params_bottom_button">
+              <p><img src="img/svg/ic_arrow_back_48px.svg" class="svg" />Load PNG</p>
             </span>
+          </div><!-- div.panel -->
 
-            <span class="param">
-              <label for="make_rml_speed">Speed (mm/s)</label>
-              <input type="number" id="make_rml_speed" name="speed" value=4>
+          <div class="panel">
+            <div class="params_title">
+              <h2>Make RML</h2>
+              <button id="makerml" class="calculate" alt="Make Rml" disabled>
+                <img src="img/svg/ic_play_arrow_48px.svg" class="" />
+              </button>
+            </div><!-- div.params_title -->
+            <div class="params_wrapper">
+              <div class="params">
+                <h3>Milling Preferences</h3>
+                <span class="param long_input">
+                  <label for="make_rml_direction">Direction</label>
+                  <select id="make_rml_direction" name="direction">
+                    <option value=1 selected="selected">CLIMB</option>
+                    <option value=0>CONVENTIONAL</option>
+                  </select>
+                </span>
+
+                <span class="param">
+                  <label for="make_rml_speed">Speed (mm/s)</label>
+                  <input type="number" id="make_rml_speed" name="speed" value=4>
+                </span>
+
+                <span class="param">
+                  <label for="make_rml_jog">Jog (mm/s)</label>
+                  <input type="number" id="make_rml_jog" name="jog" value=1>
+                </span>
+
+                <h3>Origin Point</h3>
+                <span class="param">
+                  <label for="make_rml_xmin">X-Axis Min. (mm)</label>
+                  <input type="number" id="make_rml_xmin" name="xmin" value=20>
+                </span>
+
+                <span class="param">
+                  <label for="make_rml_ymin">Y-Axis Min. (mm)</label>
+                  <input type="number" id="make_rml_ymin" name="ymin" value=20>
+                </span>
+
+              </div><!-- div.params -->
+            </div><!-- div.params_wrapper -->
+            <span class="params_title_back params_bottom_button">
+              <p><img src="img/svg/ic_arrow_back_48px.svg" class="svg" />Make Path</p>
             </span>
+          </div><!-- div.panel -->
 
-            <span class="param">
-              <label for="make_rml_jog">Jog (mm/s)</label>
-              <input type="number" id="make_rml_jog" name="jog" value=1>
+          <div class="panel">
+            <div class="params_title">
+              <h2>Send to Modela</h2>
+              <button id="sendrml" class="process" alt="Send Rml" disabled>
+                <img src="img/svg/ic_play_arrow_48px.svg" class="" />
+                <!-- <button id="connect-ws" class="process" disabled>Connect to Server</button> -->
+              </button>
+            </div><!-- div.params_title -->
+            <div class="params_wrapper">
+              <div class="params">
+                <h3>Ethernet Connection</h3>
+                <span class="param long_input">
+                  <label for="send_rml_ethernet_ip">IP Address</label>
+                  <input type="text" id="send_rml_ethernet_ip" value="192.168.100.104">
+                </span>
+
+                <span class="param long_input">
+                  <label for="send_rml_port">Port</label>
+                  <input type="text" id="send_rml_ethernet_port" value="8080">
+                </span>
+
+              </div><!-- div.params -->
+
+              <div class="params">
+                <h3>Websocket Connection</h3>
+                <span class="param long_input">
+                  <label for="send_rml_ws_ip">IP Address</label>
+                  <input type="text" id="send_rml_ws_ip" value="192.168.100.104">
+                </span>
+
+
+                <div class="ws_status" style="display: none">
+                  <p id="ws-indicator" class="status">
+                    status
+                  </p>
+                  <button id="sendrml-ws" class="process" disabled>Send .RML</button>
+                </div><!-- div.ws_status -->
+                <!-- <a href="hello.html" target="_blank" id="file_download_link" style="display:none;"> -->
+              </div><!-- div.params -->
+            </div><!-- div.params_wrapper -->
+            <span class="params_title_back params_bottom_button" style="bottom:51px">
+              <p><img src="img/svg/ic_arrow_back_48px.svg" class="svg" />Make Rml</p>
             </span>
-
-            <h3>Origin Point</h3>
-            <span class="param">
-              <label for="make_rml_xmin">X-Axis Min. (mm)</label>
-              <input type="number" id="make_rml_xmin" name="xmin" value=20>
-            </span>
-
-            <span class="param">
-              <label for="make_rml_ymin">Y-Axis Min. (mm)</label>
-              <input type="number" id="make_rml_ymin" name="ymin" value=20>
-            </span>
-
-            <button id="makerml" class="calculate" disabled>Make .RML</button>
-          </div><!-- div.params -->
-        </div><!-- div.params_wrapper -->
-      </div><!-- div.panel -->
-
-      <div class="panel">
-        <h2>Send to Modela</h2>
-        <div class="params_wrapper">
-          <div class="params">
-            <h3>Ethernet Connection</h3>
-            <span class="param long_input">
-              <label for="send_rml_ethernet_ip">IP Address</label>
-              <input type="text" id="send_rml_ethernet_ip" value="192.168.100.104">
-            </span>
-
-            <span class="param long_input">
-              <label for="send_rml_port">Port</label>
-              <input type="text" id="send_rml_ethernet_port" value="8080">
-            </span>
-
-            <button id="sendrml" class="process" disabled>Send .RML</button>
-          </div><!-- div.params -->
-
-          <div class="params">
-            <h3>Websocket Connection</h3>
-            <span class="param long_input">
-              <label for="send_rml_ws_ip">IP Address</label>
-              <input type="text" id="send_rml_ws_ip" value="192.168.100.104">
-            </span>
-
-            <button id="connect-ws" class="process" disabled>Connect to Server</button>
-
-            <div class="ws_status" style="display: none">
-              <p id="ws-indicator" class="status">
-                status
-              </p>
-              <button id="sendrml-ws" class="process" disabled>Send .RML</button>
-            </div><!-- div.ws_status -->
-          </div><!-- div.params -->
-        </div><!-- div.params_wrapper -->
-      </div><!-- div.panel -->
-
-      <div class="viewer">
+            <a href="" target="_blank" id="file_download_link" class="params_bottom_button">
+              <p><img src="img/svg/ic_file_download_48px.svg" /> Download File</p>
+            </a>
+          </div><!-- div.panel -->
+        </div><!-- div#panel_wrapper -->
+      </div><!-- div#panel_sidebar -->
+      <div id="viewer">
         <div id="canvas_wrapper">
-          <canvas class="viewer" id="pngview" style="z-index:10;"></canvas>
-          <canvas class="viewer" id="pathview" style="z-index:20;"></canvas>
+          <canvas id="pngview" style="z-index:10;"></canvas>
+          <canvas id="pathview" style="z-index:20;"></canvas>
         </div><!-- div#canvas_wrapper -->
         <div id="make_rml_log">
-          <div id="disp"></div>
-          <textarea id="rmloutput" style="resize:vertical;" placeholder="Calculation Results"></textarea>
+          <textarea id="rmloutput" style="display:none;resize:vertical;" placeholder="Calculation Results"></textarea>
         </div><!-- div#make_path_log -->
         <div id="make_path_log">
           <span id="stat"></span>
         </div><!-- div#make_path_log -->
       </div><!-- div.viewer -->
     </div><!-- div#content_wrapper -->
+
   </body>
 </html>

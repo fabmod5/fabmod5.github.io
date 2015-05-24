@@ -33,14 +33,19 @@ var cb=[ec,vb];return{_i64Subtract:Ob,_free:xb,_main:mb,_realloc:yb,_i64Add:Ub,_
 
            var rml_blob = new Blob([rml]);
            document.rml_blob = rml_blob; 
-           var a = document.createElement("a");
-           var label = document.createTextNode("Download");
-           var disp = document.getElementById("disp");
+           // var disp = document.getElementById("disp");
+           var link = document.getElementById("file_download_link");
 
            if (window.URL) {
-             disp.innerHTML = '<a href="' + window.URL.createObjectURL(rml_blob) + '" target="_blank" download="convert.rml">Download .rml file</a>';
+             // disp.innerHTML = '<a href="' + window.URL.createObjectURL(rml_blob) + '" target="_blank" download="convert.rml">Download .rml file</a>';
+             link.setAttribute("href", window.URL.createObjectURL(rml_blob));
+             link.setAttribute("download", "convert.rml");
+             link.setAttribute("style", "");
            } else if (window.webkitURL) {
-             disp.innerHTML = '<a href="' + window.webkitURL.createObjectURL(rml_blob) + '" target="_blank" download="convert.rml">Download .rml file</a>';
+             // disp.innerHTML = '<a href="' + window.webkitURL.createObjectURL(rml_blob) + '" target="_blank" download="convert.rml">Download .rml file</a>';
+             link.setAttribute("href", window.webkitURL.createObjectURL(rml_blob));
+             link.setAttribute("download", "convert.rml");
+             link.setAttribute("style", "");
            }
 
            clearInterval(timerId);
