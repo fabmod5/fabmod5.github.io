@@ -36,6 +36,7 @@ var sb=[Gg,Yb,Gf,Pf];var tb=[Hg,Ig,Zb,Hf];var ub=[Jg,ac,xd,Jg];var vb=[Kg,Id,Te,
     var canvas = document.getElementById('pathview');
     // var canvas = document.getElementById('pngview');
     var ctx = canvas.getContext( "2d" );
+    ctx.clearRect(0,0,canvas.width,canvas.height)
     var px,py,cx,cy = 0;
     function drawLine(ccx,cx,cy,px,py){
         ccx.beginPath();

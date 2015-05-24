@@ -287,6 +287,7 @@ p.sub_text {
 }
 .panel .params_title_back {
   width: 50%;
+  left: 0;
   /* Teal #100 */
   background-color: #b2dfdb;
 }
