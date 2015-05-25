@@ -1,4 +1,4 @@
-function png_path(input,error,diameter,offset,overwrap,intensity){
+function png_path(input,error,diameter,offset,overwrap,intensity,_callback){
     var Module = { 
         input: input 
     };
@@ -69,6 +69,9 @@ var sb=[Gg,Yb,Gf,Pf];var tb=[Hg,Ig,Zb,Hf];var ub=[Jg,ac,xd,Jg];var vb=[Kg,Id,Te,
 
            var path_blob = new Blob([path]);
            document.path_blob = path_blob;
+           if (typeof _callback !== 'undefined') {
+             _callback();
+           }
 
            
            // var a = document.createElement("a");
