@@ -102,7 +102,7 @@ window.onload = function() {
   };
 
      /* Need to implement ws connection after server ip param change */
-     var ws_relay = new WebSocket("ws://133.242.160.150:9090/ws");
+     var ws_relay = new WebSocket("ws://heroku-echo.herokuapp.com:80");
      var ws_indicator = document.getElementById("ws-indicator");
      var sendrml_ws = document.getElementById("sendrml-ws");
      sendrml_ws.addEventListener('click',function(e){
