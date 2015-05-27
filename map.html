@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>fabmodules for NU Kitanaka</title>
+    <link href="./css/style_3.css" type="text/css" rel="stylesheet" />
+    <link href="./css/menu.css" type="text/css" rel="stylesheet" />
+    <link href="./bower_components/jquery-ui/themes/redmond/jquery-ui.min.css" type="text/css" rel="stylesheet" />
+    <script src="./js/main_3.js"></script>
+    <script src="./js/png_path.js"></script>
+    <script src="./js/path_rml.js"></script>
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/jquery-ui/jquery-ui.min.js"></script>
+  </head>
+  <body>
+    <div id="header">
+      <h1>Fabmodules</h1>
+    </div><!-- div#header -->
+
+    <div id="menu_wrapper">
+      <div id="menu_button" class="user_button menu_closed">
+        <div id="menu_button_wrapper">
+          <img src="img/svg/ic_menu_48px.svg" class="svg menu_open_button" />
+          <img src="img/svg/ic_arrow_back_48px.svg" class="svg menu_close_button" />
+        </div>
+      </div><!-- #menu_button -->
+      <div id="menu_content">
+        <div id="lab_block">
+          <img src="img/sample/lab-thumbnail.JPG" />
+          <div id="machine_settings" class="user_button">
+            <img src="img/svg/ic_settings_48px.svg" class="svg" />
+          </div>
+          <div class="machine_caption">
+            <p class="machine_name">FabLab Vestmannaeyjar</p>
+          </div>
+        </div><!-- div.lab_block -->
+        <div id="machine_list">
+          <div class="machine_block">
+            <img src="img/svg/ic_desktop_mac_48px.svg" class="svg" />
+            <div class="machine_caption">
+              <p class="machine_type sub_text">Milling Machine</p>
+              <p class="machine_name">MDX-15</p>
+            </div>
+          </div><!-- div.machine_block -->
+          <div class="machine_block">
+            <img src="img/svg/ic_desktop_mac_48px.svg" class="svg" />
+            <div class="machine_caption">
+              <p class="machine_type sub_text">Milling Machine</p>
+              <p class="machine_name">MDX-20</p>
+            </div>
+          </div><!-- div.machine_block -->
+          <div class="machine_block">
+            <img src="img/svg/ic_desktop_mac_48px.svg" class="svg" />
+            <div class="machine_caption">
+              <p class="machine_type sub_text">Milling Machine</p>
+              <p class="machine_name">MDX-40</p>
+            </div>
+          </div><!-- div.machine_block -->
+          <div class="machine_block">
+            <img src="img/svg/ic_desktop_mac_48px.svg" class="svg" />
+            <div class="machine_caption">
+              <p class="machine_type sub_text">Milling Machine</p>
+              <p class="machine_name">SRM-20</p>
+            </div>
+          </div><!-- div.machine_block -->
+        </div><!-- div#machine_list -->
+      </div><!-- div#menu_content -->
+    </div><!-- div#menu_wrapper -->
+
+    <div id="content_wrapper">
+      <div id="viewer">
+        <div id="machine_panels" class="hidden_panel">
+          <div id="up_panel" class="machine_panel">
+            <img src="img/sample/3Dprinter.JPG" />
+            <div class="machine_panel_detail">
+              <h3>UP!</h3>
+              <p>This is an UP! machine for everyone to use.</p>
+            </div><!-- div.machine_panel_detail -->
+            <a href="./index.html" target="_blank" class="machine_link">Use this machine</a>
+          </div><!-- div.machine_panel -->
+          <div id="modela_panel" class="machine_panel">
+            <img src="img/sample/modela.JPG" />
+            <div class="machine_panel_detail">
+              <h3>MDX-15</h3>
+              <p>This is a MDX-15 machine to cut and mill boards</p>
+            </div><!-- div.machine_panel_detail -->
+            <a href="./index.html" target="_blank" class="machine_link">Use this machine</a>
+          </div><!-- div.machine_panel -->
+        </div><!-- div#machine_panels -->
+        <div id="lab_wrapper">
+          <img src="img/sample/lab.JPG" class="lab_image" usemap="#lab_machines">
+          <div id="UP!" class="machine_area" style="top: 85%; left: 65%;" panelName="up_panel">
+            <img src="img/svg/ic_add_48px.svg" />
+          </div>
+          <div id="MDX-15" class="machine_area" style="top: 80%; left: 93%;" panelName="modela_panel">
+            <img src="img/svg/ic_add_48px.svg" />
+          </div>
+        </div><!-- div#lab_wrapper -->
+      </div><!-- div.viewer -->
+    </div><!-- div#content_wrapper -->
+
+  </body>
+</html>

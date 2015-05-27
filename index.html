@@ -1,245 +1,243 @@
 <!doctype html>
 <html>
-    <head>
-        <title>fab modules</title>
-        <script src="./png_path.js"></script>
-        <script src="./path_rml.js"></script>
-        <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-        <script>
-        window.onload = function() {
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>fabmodules for NU Kitanaka</title>
+    <link href="./css/style.css" type="text/css" rel="stylesheet" />
+    <link href="./css/menu.css" type="text/css" rel="stylesheet" />
+    <link href="./bower_components/jquery-ui/themes/redmond/jquery-ui.min.css" type="text/css" rel="stylesheet" />
+    <script src="./js/main.js"></script>
+    <script src="./js/png_path.js"></script>
+    <script src="./js/path_rml.js"></script>
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/jquery-ui/jquery-ui.min.js"></script>
+  </head>
+  <body>
+    <div id="header">
+      <h1>Fabmodules</h1>
+    </div><!-- div#header -->
 
-            var canvas = document.getElementById('pngview');
-            document.ctx = canvas.getContext('2d');
-        
-            var pngInput = document.getElementById('loadpng');
-            pngInput.addEventListener('change', function(e) {
-                document.png_file = e.target.files[0];
-                document.png_url = URL.createObjectURL(document.png_file);
-                var img = new Image();
-                img.src = document.png_url;
-                img.onload = function(){
-                    document.ctx.drawImage(img, 0, 0, 250, 250 * img.height/ img.width);
-                }
-                document.getElementById("makepath").disabled = false;
-            }, false);
-        
-            var pathInput = document.getElementById('makepath');
-            pathInput.addEventListener('click', function(e) {
-                var reader = new FileReader;
-                reader.readAsArrayBuffer(document.png_file);
-                reader.onload = function() {
-                    var error = document.getElementsByName("error")[0].value;
-                    var diameter = document.getElementsByName("diameter")[0].value;
-                    var offset = document.getElementsByName("offset")[0].value;
-                    var overwrap = document.getElementsByName("overwrap")[0].value;
-                    var intensity = document.getElementsByName("intensity")[0].value;
-                    //png_path(INPUT_ARRAY,error(px) diameter(mm) offset(-1) overwrap(0-1) intensity(0-1))
-                    var res = png_path(new Uint8Array(reader.result),error,diameter,offset,overwrap,intensity);
-                    document.getElementById("makerml").disabled = false;
-                };
-            }, false);
-
-            // var pathInput = document.getElementById('loadpath');
-            // pathInput.addEventListener('change', function(e) {
-            //   var file = e.target.files[0];
-            //   var reader = new FileReader;
-            //   reader.readAsArrayBuffer(file);
-            //   reader.onload = function() {
-            //     //path_rml(INPUT_ARRAY,direction(climb:1, conventional:0),speed(mm/s),jog(mm),xmin(mm),ymin(mm))
-            //     var res = path_rml(new Uint8Array(reader.result),4,1,1,20,20);
-            //   };
-            // }, false);
-        
-            var rmlInput = document.getElementById('makerml');
-            rmlInput.addEventListener('click', function(e) {
-                var file_reader = new FileReader();
-                file_reader.onload = function(e){
-                    var direction = document.getElementsByName("direction")[0].value;
-                    var speed = document.getElementsByName("speed")[0].value;
-                    var jog = document.getElementsByName("jog")[0].value;
-                    var xmin = document.getElementsByName("xmin")[0].value;
-                    var ymin = document.getElementsByName("ymin")[0].value;
-
-                    var path_uint8_arr = new Uint8Array(file_reader.result);
-                    path_rml(path_uint8_arr,speed,direction,jog,xmin,ymin);
-                    document.getElementById("sendrml").disabled = false;
-                    document.getElementById("sendrml-ws").disabled = false;
-                };
-                file_reader.readAsArrayBuffer(document.path_blob);
-            }, false);
-
-            var rmlSend = document.getElementById('sendrml');
-            rmlSend.addEventListener('click', function(e) {
-                var rmldata = document.querySelector("#rmloutput").innerHTML
-                sendRmlToRpi(rmldata);
-                // console.log(rmldata)  
-                // console.log("this function is not yet implemented.");
-                // var file_reader = new FileReader();
-                // file_reader.onload = function(e){
-                //     var path_uint8_arr = new Uint8Array(file_reader.result);
-                //     path_rml(path_uint8_arr,4,1,1,20,20);
-                //     document.getElementById("sendrml").disabled = false;
-                // };
-                // file_reader.readAsArrayBuffer(document.path_blob);
-            }, false);
-
-            var sendRmlToRpi = function(rmldata){
-              // rmljson  = JSON.stringify('{rml:'+rmldata+'}');
-              // rmljson  = JSON.stringify('{rml:hoge}');
-              console.log(rmldata);
-              var mip = document.getElementById("modela_ip");
-              var mport = document.getElementById("modela_port");
-              var murl = 'http://'+mip+':'+mport;
-              $.ajax({
-                  type: 'POST',
-                  url: murl,
-                  // data: rmljson,
-                  dataType: 'text',
-                  data: {
-                        rml: rmldata
-                       // rml: JSON.stringify(rmldata)
-                       // rml: "PU1.0,2.0;H;"
-                  },
-                  success: function(){
-                    console.log("success");
-                  }
-              });
-            };
-
-            var ws_relay = new WebSocket("ws://heroku-echo.herokuapp.com:80");
-            var ws_indicator = document.getElementById("ws-indicator");
-            if(ws_relay){
-               ws_indicator.innerHTML = "Relay server is working";
-            }
-            ws_relay.onopen = function() {
-                console.log("websocket opened");
-            };
-            ws_relay.onmessage = function (evt) {
-               console.log("data received: "+evt.data);
-            };
-            var sendrml_ws = document.getElementById("sendrml-ws");
-            sendrml_ws.addEventListener('click',function(e){
-                console.log("send rml");
-                var rmldata = document.querySelector("#rmloutput").innerHTML
-                // ws_relay.send("rml text here");
-                ws_relay.send(rmldata);
-            });
-            ws_relay.onclose = function(){
-                ws_indicator.innerHTML = "Relay server is down. Check and reload.";
-                console.log("websocket closed");
-            }
-
-        };
-        </script>
-        <style>
-            label {
-                font-size: 14px;
-            }
-            .col {
-                margin-left:30px;
-                float:left;
-                width: 300px;
-            }
-            #container1 {
-                height:520px;
-                clear:both;
-            }
-            #container2 {
-                /* height:170px; */
-                /* clear:both; */
-            }
-            #footer {
-                margin: 30px;
-            }
-
-            #rmloutput{
-                width:250px;
-                height:250px;
-            }
-            .paramInput input{
-                width:50px;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Fab modules on HTML5 demo</h1>
-
-        <div id="container1">
-            <div class="col">
-                <p>Load PNG <a href="./fabisp.png" download="fabisp.png">sample</a></p>
-                <p><input type="file" id="loadpng" accept="image/png"/></p>
-                <canvas class="viewer" id="pngview"></canvas>
-
-                <div id="container2">
-                   <p>Send to Modela</p>
-                   <p><label>IP address</label>
-                   <input type="text" id="modela_ip" value="192.168.100.104">
-                   </p>
-                   <p>
-                   <label>port</label>
-                   <input type="text" id="modela_port" value="8080">
-                   </p>
-                   <button id="sendrml" disabled>send .rml</button>
-                   <p>Websocket: <span id="ws-indicator" style="color:gray">status</span></p>
-                     <button id="sendrml-ws" disabled>send .rml</button>
-                </div>
-           </div>
-
-            <div class="col">
-              <div class="paramInput">
-                <p>Make PATH</p>
-                    <button id="makepath" disabled>make .path</button>
-                    <span id="stat"></span>
-                </p>
-                <canvas class="viewer" id="pathview"></canvas>
-                    <p>
-                      <label>error(px)</label>
-                      <input type="number" name="error" value=1.1>
-                      <label>diameter(mm)</label>
-                      <input type="number" name="diameter" value=0.25>
-                    </p>
-                    <p>
-                      <label>offset(-1 to fill)</label>
-                      <input type="number" name="offset" value=1>
-                      <label>overwrap(0-1)</label>
-                      <input type="number" name="overwrap" value=0.5>
-                    </p>
-                    <p>
-                      <label>intensity(0-1)</label>
-                      <input type="number" name="intensity" value=0.5>
-                    <p>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="paramInput">
-                <p>Make RML</p>
-                    <p>
-                      <label>direction</label>
-                      <select name="direction">
-                        <option value=1 selected="selected">Climb</option>
-                        <option value=0 >Conventional</option>
-                      </select>
-                      <label>speed(mm/s)</label>
-                      <input type="number" name="speed" value=4>
-                    </p>
-                    <p>
-                      <label>jog(mm/s)</label>
-                      <input type="number" name="jog" value=1>
-                      <label>xmin(mm)</label>
-                      <input type="number" name="xmin" value=20>
-                    </p>
-                    <p>
-                      <label>ymin(mm)</label>
-                      <input type="number" name="ymin" value=20>
-                    <p>
-                <p><button id="makerml" disabled>make .rml</button></p>
-                <textarea id="rmloutput"></textarea>
-                <div id="disp"> </div>
-            </div>
-          </div>
+    <div id="menu_wrapper">
+      <div id="menu_button" class="user_button menu_closed">
+        <div id="menu_button_wrapper">
+          <img src="img/svg/ic_apps_48px.svg" class="svg menu_open_button" />
+          <img src="img/svg/ic_arrow_back_48px.svg" class="svg menu_close_button" />
         </div>
+      </div><!-- #menu_button -->
+      <div id="current_machine_block">
+        <img src="img/sample/3Dprinter.JPG" />
+        <div id="machine_settings" class="user_button">
+          <img src="img/svg/ic_settings_48px.svg" class="svg" />
+        </div>
+        <div class="machine_caption">
+          <p class="machine_name">MDX-15</p>
+        </div>
+      </div><!-- div.machine_block -->
+      <div id="machine_list">
+        <div class="machine_block">
+          <img src="img/svg/ic_desktop_mac_48px.svg" class="svg" />
+          <div class="machine_caption">
+            <p class="machine_type sub_text">Milling Machine</p>
+            <p class="machine_name">MDX-15</p>
+          </div>
+        </div><!-- div.machine_block -->
+        <div class="machine_block">
+          <img src="img/svg/ic_desktop_mac_48px.svg" class="svg" />
+          <div class="machine_caption">
+            <p class="machine_type sub_text">Milling Machine</p>
+            <p class="machine_name">MDX-20</p>
+          </div>
+        </div><!-- div.machine_block -->
+        <div class="machine_block">
+          <img src="img/svg/ic_desktop_mac_48px.svg" class="svg" />
+          <div class="machine_caption">
+            <p class="machine_type sub_text">Milling Machine</p>
+            <p class="machine_name">MDX-40</p>
+          </div>
+        </div><!-- div.machine_block -->
+        <div class="machine_block">
+          <img src="img/svg/ic_desktop_mac_48px.svg" class="svg" />
+          <div class="machine_caption">
+            <p class="machine_type sub_text">Milling Machine</p>
+            <p class="machine_name">SRM-20</p>
+          </div>
+        </div><!-- div.machine_block -->
+      </div><!-- div#machine_list -->
+    </div><!-- div#menu_wrapper -->
+
+    <div id="content_wrapper">
+      <div id="panel_sidebar">
+        <div id="panel_wrapper">
+          <div class="panel">
+            <div class="params_title">
+              <h2>Load PNG</h2>
+            </div><!-- div.params_title -->
+            <div class="inputs_wrapper">
+              <div class="input">
+                <p class="sample_data"><a href="./fabisp.png" download="fabisp.png">VIEW SAMPLE</a></p>
+                <p>
+                  <input type="file" id="loadpng" accept="image/png"/>
+                </p>
+                <p>
+                  <img id="file_preview" /><br/>
+                  <span id="filename"></span>
+                </p>
+              </div><!-- div.input -->
+            </div><!-- div.inputs_wrapper -->
+          </div><!-- div.panel -->
+
+          <div class="panel">
+            <div class="params_title">
+              <h2>Make PATH</h2>
+              <button id="makepath" class="calculate" alt="Make Path" disabled>
+                <img src="img/svg/ic_play_arrow_48px.svg" class="" />
+              </button>
+            </div>
+            <div class="params_wrapper">
+              <div class="params">
+                <span class="param">
+                  <label for="make_path_error">Detection Accuracy ( px )</label>
+                  <input type="number" id="make_path_error" name="error" value=1.1>
+                </span><!-- span.param -->
+
+                <span class="param">
+                  <label for="make_path_diameter">Diameter ( mm )</label>
+                  <input type="number" id="make_path_diameter" name="diameter" value=0.25>
+                </span><!-- span.param -->
+
+                <span class="param">
+                  <label for="make_path_offset">Offset ( -1 to fill )</label>
+                  <input type="number" id="make_path_offset" name="offset" value=1>
+                </span><!-- span.param -->
+
+                <span class="param">
+                  <label for="make_path_overlap">Overlap ( 0 - 1 )</label>
+                  <input type="number" id="make_path_overlap" name="overlap" value=0.5>
+                </span><!-- span.param -->
+
+                <span class="param">
+                  <label for="make_path_intensity">Intensity ( 0 - 1 )</label>
+                  <input type="number" id="make_path_intensity" name="intensity" value=0.5>
+                </span><!-- span.param -->
+
+              </div><!-- div.params -->
+            </div><!-- div.params_wrapper -->
+            <span class="params_title_back params_bottom_button">
+              <p><img src="img/svg/ic_arrow_back_48px.svg" class="svg" />Load PNG</p>
+            </span>
+          </div><!-- div.panel -->
+
+          <div class="panel">
+            <div class="params_title">
+              <h2>Make RML</h2>
+              <button id="makerml" class="calculate" alt="Make Rml" disabled>
+                <img src="img/svg/ic_play_arrow_48px.svg" class="" />
+              </button>
+            </div><!-- div.params_title -->
+            <div class="params_wrapper">
+              <div class="params">
+                <h3>Milling Preferences</h3>
+                <span class="param long_input">
+                  <label for="make_rml_direction">Direction</label>
+                  <select id="make_rml_direction" name="direction">
+                    <option value=1 selected="selected">CLIMB</option>
+                    <option value=0>CONVENTIONAL</option>
+                  </select>
+                </span>
+
+                <span class="param">
+                  <label for="make_rml_speed">Milling Speed ( mm/s )</label>
+                  <input type="number" id="make_rml_speed" name="speed" value=4>
+                </span>
+
+                <span class="param">
+                  <label for="make_rml_jog">Jog Speed ( mm/s )</label>
+                  <input type="number" id="make_rml_jog" name="jog" value=1>
+                </span>
+
+                <h3>Origin Point</h3>
+                <span class="param">
+                  <label for="make_rml_xmin">Origin-X ( mm )</label>
+                  <input type="number" id="make_rml_xmin" name="xmin" value=20>
+                </span>
+
+                <span class="param">
+                  <label for="make_rml_ymin">Origin-Y ( mm )</label>
+                  <input type="number" id="make_rml_ymin" name="ymin" value=20>
+                </span>
+
+              </div><!-- div.params -->
+            </div><!-- div.params_wrapper -->
+            <span class="params_title_back params_bottom_button">
+              <p><img src="img/svg/ic_arrow_back_48px.svg" class="svg" />Make Path</p>
+            </span>
+          </div><!-- div.panel -->
+
+          <div class="panel">
+            <div class="params_title">
+              <h2>Send to Modela</h2>
+              <button id="sendrml" class="process" alt="Send Rml" disabled>
+                <img src="img/svg/ic_play_arrow_48px.svg" class="" />
+                <!-- <button id="connect-ws" class="process" disabled>Connect to Server</button> -->
+              </button>
+            </div><!-- div.params_title -->
+            <div class="params_wrapper">
+              <div class="params">
+                <h3>Ethernet Connection</h3>
+                <span class="param long_input">
+                  <label for="send_rml_ethernet_ip">IP Address</label>
+                  <input type="text" id="send_rml_ethernet_ip" value="192.168.100.104">
+                </span>
+
+                <span class="param long_input">
+                  <label for="send_rml_port">Port</label>
+                  <input type="text" id="send_rml_ethernet_port" value="8080">
+                </span>
+
+              </div><!-- div.params -->
+
+              <div class="params">
+                <h3>Websocket Connection</h3>
+                <span class="param long_input">
+                  <label for="send_rml_ws_ip">IP Address</label>
+                  <input type="text" id="send_rml_ws_ip" value="192.168.100.104">
+                </span>
 
 
-    </body>
+                <div class="ws_status" style="display: none">
+                  <p id="ws-indicator" class="status">
+                    status
+                  </p>
+                  <button id="sendrml-ws" class="process" disabled>Send .RML</button>
+                </div><!-- div.ws_status -->
+                <!-- <a href="hello.html" target="_blank" id="file_download_link" style="display:none;"> -->
+              </div><!-- div.params -->
+            </div><!-- div.params_wrapper -->
+            <span class="params_title_back params_bottom_button">
+              <p><img src="img/svg/ic_arrow_back_48px.svg" class="svg" />Make Rml</p>
+            </span>
+            <a href="" target="_blank" id="file_download_link" class="params_bottom_button">
+              <p><img src="img/svg/ic_file_download_48px.svg" />Download</p>
+            </a>
+          </div><!-- div.panel -->
+        </div><!-- div#panel_wrapper -->
+      </div><!-- div#panel_sidebar -->
+      <div id="viewer">
+        <div id="canvas_wrapper">
+          <canvas id="pngview" style="z-index:10;"></canvas>
+          <canvas id="pathview" style="z-index:20;"></canvas>
+        </div><!-- div#canvas_wrapper -->
+        <div id="make_rml_log">
+          <textarea id="rmloutput" style="display:none;resize:vertical;" placeholder="Calculation Results"></textarea>
+        </div><!-- div#make_path_log -->
+        <div id="make_path_log">
+          <span id="stat"></span>
+        </div><!-- div#make_path_log -->
+      </div><!-- div.viewer -->
+    </div><!-- div#content_wrapper -->
+
+  </body>
 </html>

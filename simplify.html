@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>fabmodules for NU Kitanaka</title>
+    <link href="./css/style_2.css" type="text/css" rel="stylesheet" />
+    <link href="./css/menu.css" type="text/css" rel="stylesheet" />
+    <link href="./bower_components/jquery-ui/themes/redmond/jquery-ui.min.css" type="text/css" rel="stylesheet" />
+    <script src="./js/main_2.js"></script>
+    <script src="./js/png_path.js"></script>
+    <script src="./js/path_rml.js"></script>
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/jquery-ui/jquery-ui.min.js"></script>
+  </head>
+  <body>
+    <div id="header">
+      <h1>Fabmodules</h1>
+    </div><!-- div#header -->
+
+    <div id="menu_wrapper">
+      <div id="menu_button" class="user_button menu_closed">
+        <div id="menu_button_wrapper">
+          <img src="img/svg/ic_menu_48px.svg" class="svg menu_open_button" />
+          <img src="img/svg/ic_arrow_back_48px.svg" class="svg menu_close_button" />
+        </div>
+      </div><!-- #menu_button -->
+      <div id="menu_content">
+        <div id="current_machine_block">
+          <div class="machine_caption">
+            <p class="machine_name">MDX-15</p>
+          </div>
+        </div><!-- div.machine_block -->
+        <div class="panel">
+          <div class="params_title">
+            <h3>HIGH RESOLUTION</h3>
+          </div><!-- div.params_title -->
+          <div class="params">
+            <span class="param">
+              <label for="make_path_error">Accuracy ( px )</label>
+              <input type="number" id="HIGH-make_path_error" name="error" value=0.30>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_diameter">Diameter ( mm )</label>
+              <input type="number" id="HIGH-make_path_diameter" name="diameter" value=0.25>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_offset">Offset ( -1 to fill )</label>
+              <input type="number" id="HIGH-make_path_offset" name="offset" value=1>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_overlap">Overlap ( 0 - 1 )</label>
+              <input type="number" id="HIGH-make_path_overlap" name="overlap" value=0.5>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_intensity">Intensity ( 0 - 1 )</label>
+              <input type="number" id="HIGH-make_path_intensity" name="intensity" value=0.5>
+            </span><!-- span.param -->
+
+          </div><!-- div.params -->
+        </div><!-- div.panel -->
+        <div class="panel">
+          <div class="params_title">
+            <h3>MEDIUM RESOLUTION</h3>
+          </div><!-- div.params_title -->
+          <div class="params">
+            <span class="param">
+              <label for="make_path_error">Accuracy ( px )</label>
+              <input type="number" id="MEDIUM-make_path_error" name="error" value=0.80>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_diameter">Diameter ( mm )</label>
+              <input type="number" id="MEDIUM-make_path_diameter" name="diameter" value=0.25>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_offset">Offset ( -1 to fill )</label>
+              <input type="number" id="MEDIUM-make_path_offset" name="offset" value=1>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_overlap">Overlap ( 0 - 1 )</label>
+              <input type="number" id="MEDIUM-make_path_overlap" name="overlap" value=0.5>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_intensity">Intensity ( 0 - 1 )</label>
+              <input type="number" id="MEDIUM-make_path_intensity" name="intensity" value=0.5>
+            </span><!-- span.param -->
+
+          </div><!-- div.params -->
+        </div><!-- div.panel -->
+        <div class="panel">
+          <div class="params_title">
+            <h3>LOW RESOLUTION</h3>
+          </div><!-- div.params_title -->
+          <div class="params">
+            <span class="param">
+              <label for="make_path_error">Accuracy ( px )</label>
+              <input type="number" id="LOW-make_path_error" name="error" value=1.1>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_diameter">Diameter ( mm )</label>
+              <input type="number" id="LOW-make_path_diameter" name="diameter" value=0.25>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_offset">Offset ( -1 to fill )</label>
+              <input type="number" id="LOW-make_path_offset" name="offset" value=1>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_overlap">Overlap ( 0 - 1 )</label>
+              <input type="number" id="LOW-make_path_overlap" name="overlap" value=0.5>
+            </span><!-- span.param -->
+
+            <span class="param">
+              <label for="make_path_intensity">Intensity ( 0 - 1 )</label>
+              <input type="number" id="LOW-make_path_intensity" name="intensity" value=0.5>
+            </span><!-- span.param -->
+
+          </div><!-- div.params -->
+        </div><!-- div.panel -->
+        <div class="panel">
+          <div class="params_title">
+            <h3>Make RML</h3>
+          </div><!-- div.params_title -->
+          <div class="params">
+            <span class="param long_input">
+              <label for="make_rml_direction">Direction</label>
+              <select id="make_rml_direction" name="direction">
+                <option value=1 selected="selected">CLIMB</option>
+                <option value=0>CONVENTIONAL</option>
+              </select>
+            </span>
+
+            <span class="param">
+              <label for="make_rml_speed">Milling Speed ( mm/s )</label>
+              <input type="number" id="make_rml_speed" name="speed" value=4>
+            </span>
+
+            <span class="param">
+              <label for="make_rml_jog">Jog Speed ( mm/s )</label>
+              <input type="number" id="make_rml_jog" name="jog" value=1>
+            </span>
+
+            <span class="param">
+              <label for="make_rml_xmin">Origin-X ( mm )</label>
+              <input type="number" id="make_rml_xmin" name="xmin" value=20>
+            </span>
+
+            <span class="param">
+              <label for="make_rml_ymin">Origin-Y ( mm )</label>
+              <input type="number" id="make_rml_ymin" name="ymin" value=20>
+            </span>
+
+          </div><!-- div.params -->
+        </div><!-- div.panel -->
+      </div><!-- div#menu_content -->
+    </div><!-- div#menu_wrapper -->
+
+    <div id="content_wrapper">
+      <div id="viewer">
+        <div id="canvas_wrapper">
+          <canvas id="pngview" style="z-index:10;"></canvas>
+          <canvas id="pathview" style="z-index:20;"></canvas>
+        </div><!-- div#canvas_wrapper -->
+        <div id="make_rml_log">
+          <textarea id="rmloutput" style="display:none;resize:vertical;" placeholder="Calculation Results"></textarea>
+        </div><!-- div#make_path_log -->
+        <div id="make_path_log">
+          <span id="stat"></span>
+        </div><!-- div#make_path_log -->
+        <div id="control_panel">
+          <div class="file_input">
+            <span id="file_upload_link" >
+              <input type="file" id="loadpng" accept="image/png"/>
+              <p><img src="img/svg/ic_file_upload_48px.svg" />Upload File</p>
+            </span>
+            </p>
+            <p>
+              <span id="filename"></span>
+            </p>
+          </div><!-- div.input -->
+          <div class="make_path" style="display:none;">
+            <div class="control_title">
+              <p>Process Quality</p>
+            </div><!-- div.control_title -->
+            <div class="control_buttons">
+              <div>
+                <button id="makepath_low" class="calculate" alt="Make Path Low Quality" disabled>
+                  <p>L</p>
+                </button>
+              </div>
+              <div>
+                <button id="makepath_medium" class="calculate" alt="Make Path Medium Quality" disabled>
+                  <p>M</p>
+                </button>
+              </div>
+              <div>
+                <button id="makepath_high" class="calculate" alt="Make Path High Quality" disabled>
+                  <p>H</p>
+                </button>
+              </div>
+            </div><!-- div.control_buttons -->
+          </div><!-- div.make_path -->
+          <div class="file_output" style="display:none;">
+            <a href="" target="_blank" id="file_download_link" >
+              <p><img src="img/svg/ic_file_download_48px.svg" />Download</p>
+            </a>
+          </div>
+        </div><!-- div#control_panel -->
+      </div><!-- div.viewer -->
+    </div><!-- div#content_wrapper -->
+
+  </body>
+</html>

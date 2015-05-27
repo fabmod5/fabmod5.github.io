@@ -1,0 +1,600 @@
+/* GLOBAL DESIGN */
+@import url(http://fonts.googleapis.com/css?family=RobotoDraft:200,300,400,500,400italic);
+@import url(http://fonts.googleapis.com/css?family=Roboto:200,300,400,500,400italic);
+
+* {
+  font-family : 'RobotoDraft', 'Roboto', YuGothic, '游ゴシック', sans-serif;
+}
+html, body, div, span, h1, h2, h3, h4, h5, h6, ul, li, p {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 16px;
+  line-height: 160%;
+  min-width: 480px;
+}
+body {
+  height: auto;
+}
+h1 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin: 0;
+}
+h2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+  font-weight: 500;
+  display: inline-block;
+  border-bottom: 2px solid black;
+}
+h3:first-child {
+  margin-top: 0;
+}
+a {
+  color: black;
+  text-decoration:none;
+}
+input, select, label, span, p, a {
+  font-weight: 400;
+}
+svg path {
+  fill: white;
+}
+p.sub_text {
+  font-size: 0.8em;
+  line-height: 120%;
+}
+
+/* MATERIAL DESIGN */
+#header {
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+/*
+.panel {
+  background-color: white;
+  border-radius: 0.1rem;
+  -moz-transition:    all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition:      all 0.3s ease-in-out;
+  -ms-transition:     all 0.3s ease-in-out;
+  transition:         all 0.3s ease-in-out;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.08);
+}
+.panel:hover {
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.3);
+}
+  */
+
+/* DIV LAYOUT */
+#header {
+  position: fixed;
+  /* Blue Gray 500 */
+  background-color: #00897b;
+  color: white;
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+#header h1 {
+  display: inline-block;
+  margin-left: 60px;
+  line-height: 50px;
+}
+#menu_wrapper {
+  width: 280px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: -280px;
+  z-index: 200;
+  /* Blue Gray 200 */
+  background-color: #FFFFFF;
+  -moz-transition:    all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition:      all 0.3s ease-in-out;
+  -ms-transition:     all 0.3s ease-in-out;
+  transition:         all 0.3s ease-in-out;
+}
+#machine_list svg path {
+  fill: #444444;
+}
+#lab_block {
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid #CCCCCC;
+}
+#lab_block > img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+#lab_block .machine_caption {
+  font-size: 1.2rem;
+  height: auto;
+  overflow: hidden;
+  padding: 12px 16px;
+}
+#lab_block .machine_caption p.machine_name {
+  color: #444444;
+}
+.machine_block {
+  display: inline-block;
+  height: auto;
+  width: 248px;
+  padding: 0 16px 16px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.machine_block:first-child {
+  padding-top: 16px;
+}
+.machine_block .machine_caption {
+  width: 185px;
+  margin-left: 55px;
+  height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+.machine_block .machine_caption p.machine_name {
+  color: #444444;
+}
+.machine_block .machine_caption p.machine_type {
+  color: #999999;
+}
+.machine_block img,
+.machine_block svg {
+  height: 40px;
+  width: auto;
+  float: left;
+}
+.user_button {
+  display: block;
+  height: 36px;
+  width: 36px;
+  margin: 7px;
+  cursor: pointer;
+  -moz-transition:    all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition:      all 0.3s ease-in-out;
+  -ms-transition:     all 0.3s ease-in-out;
+  transition:         all 0.3s ease-in-out;
+}
+.user_button img,
+.user_button svg {
+  height: 24px;
+  width: 24px;
+  margin: 6px;
+}
+#menu_button {
+  float: right;
+  margin-right: -43px;
+  position: relative;
+  border-radius: 50%;
+}
+#menu_button:hover {
+  /* Blue Gray 200 */
+  background-color: #B0BEC5;
+}
+#menu_button img,
+#menu_button svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#menu_button .menu_close_button {
+  transform: rotate(-180deg);
+}
+#menu_button_wrapper {
+  display:inline-block;
+  width: 100%;
+  height: 100%;
+  -moz-transition:    transform 0.3s linear;
+  -webkit-transition: transform 0.3s linear;
+  -o-transition:      transform 0.3s linear;
+  -ms-transition:     transform 0.3s linear;
+  transition:         transform 0.3s linear;
+}
+#menu_wrapper[menuopen=open] #menu_button_wrapper {
+  transform: rotate(180deg);
+}
+#menu_wrapper[menuopen=open] .menu_open_button {
+  visibility: hidden;
+}
+#menu_wrapper[menuopen=closed] .menu_close_button {
+  visibility: hidden;
+}
+#menu_content {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#machine_settings {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#content_wrapper {
+  margin-top: 50px;
+  height: auto;
+  overflow: hidden;
+  /* Blue Gray 50 */
+  background-color: #ECEFF1;
+}
+#panel_sidebar {
+  width: 320px;
+  margin-left: -1px;
+  border-left: 1px solid #CCCCCC;
+  float: right;
+  overflow: hidden;
+  background-color: white;
+  position: relative;
+}
+#panel_wrapper {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -moz-transition:    left 0.5s ease-in-out;
+  -webkit-transition: left 0.5s ease-in-ous;
+  -o-transition:      left 0.5s ease-in-ous;
+  -ms-transition:     left 0.5s ease-in-ous;
+  transition:         left 0.5s ease-in-ous;
+}
+.panel {
+  height: 100%;
+  width: 320px;
+  position: relative;
+  float: left;
+  overflow: hidden;
+}
+.panel .params_title {
+  padding: 1.2rem 0.6rem;
+  position: relative;
+  /* Teal #300 */
+  background-color: #4db6ac;
+}
+.panel .params_bottom_button {
+  position: absolute;
+  bottom: 0;
+  display: inline-block;
+  cursor: pointer;
+  -moz-transition:    background-color 0.3s ease-in-out;
+  -webkit-transition: background-color 0.3s ease-in-ous;
+  -o-transition:      background-color 0.3s ease-in-ous;
+  -ms-transition:     background-color 0.3s ease-in-ous;
+  transition:         background-color 0.3s ease-in-ous;
+}
+.panel .params_bottom_button p {
+  vertical-align: middle;
+  margin: 0.6rem;
+}
+.panel .params_bottom_button svg,
+.panel .params_bottom_button img {
+  vertical-align: middle;
+  margin-right: 0.6rem;
+  height: 24px;
+  width: 24px;
+}
+.panel .params_title_back {
+  width: 50%;
+  left: 0;
+  /* Teal #100 */
+  background-color: #b2dfdb;
+}
+.panel .params_title_back:hover {
+  /* Teal #200 */
+  background-color: #80cbc4;
+}
+.panel .params_title_back svg path {
+  fill: black;
+}
+.panel .inputs_wrapper {
+  padding: 0.6rem;
+}
+.panel .params_wrapper {
+  padding: 0.6rem;
+  padding-top: 1.8rem;
+}
+.params {
+  height: auto;
+  overflow: hidden;
+  margin-top: 0.8rem;
+}
+.params:first-child {
+  margin-top: 0;
+}
+.sample_data {
+  font-size: 0.8em;
+}
+#file_preview {
+  width: 60%;
+}
+
+/* INPUTS */
+.params .param {
+  display: inline-block;
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  margin: 0.6rem 0 0;
+  vertical-align: middle;
+}
+.params .param:first-child {
+  margin-top: 0;
+}
+.params .param * {
+  font-size: 0.9rem;
+}
+label {
+  vertical-align: middle;
+  padding: 0.2rem 0;
+  margin: 1px 0;
+}
+input[type=number], input[type=text], select, textarea {
+  height: 1.44rem;
+  vertical-align: middle;
+  box-sizing: content-box;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid #BDBEC2;
+  border-radius: 0.1rem;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+input[type=number]:focus,
+input[type=text]:focus,
+select:focus,
+textarea:focus {
+  border: 1px solid #5bcaff;
+  -webkit-box-shadow: inset 0px 0px 2px 0px rgba(91,202,255,0.7);
+  -moz-box-shadow:    inset 0px 0px 2px 0px rgba(91,202,255,0.7);
+  box-shadow:         inset 0px 0px 2px 0px rgba(91,202,255,0.7);
+}
+button {
+  /*
+  font-size: 1rem;
+  line-height: 100%;
+  text-align: center;
+  */
+  display: block;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  -moz-transition:    all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-ous;
+  -o-transition:      all 0.3s ease-in-ous;
+  -ms-transition:     all 0.3s ease-in-ous;
+  transition:         all 0.3s ease-in-ous;
+}
+button:hover, button:active {
+  opacity: 0.7;
+}
+button img,
+button svg {
+  height: 24px;
+  width: 24px;
+  margin: 6px;
+  display: block;
+}
+.params_title button {
+  position: absolute;
+  bottom: -21px;
+  right: 8px;
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.36);
+}
+.params_title button:hover {
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.45);
+}
+.params label {
+  line-height: 160%;
+  width: 60%;
+}
+.long_input label {
+  width: 45%;
+}
+.params input, .params select {
+  line-height: 160%;
+  width: 30%;
+  float: right;
+}
+.long_input input,
+.long_input select {
+  width: 45%;
+  text-align: right;
+}
+button.calculate {
+  /* Yellow A400 */
+  background-color: #ffea00;
+  color: white;
+}
+button.calculate:hover {
+  opacity: 1.0;
+  /* Yellow A700 */
+  background-color: #ffab00;
+}
+button.process {
+  /* Pink A200 */
+  background-color: #ff4081;
+  color: white;
+}
+button.process:hover {
+  opacity: 1.0;
+  /* Pink A400 */
+  background-color: #f50057;
+}
+input[disabled], button[disabled] {
+  background:#DCDCDC;
+  cursor:not-allowed;
+}
+
+/* OUTPUTS */
+#rmloutput{
+  width:250px;
+  height:250px;
+}
+#file_download_link {
+  width: 50%;
+  left: auto;
+  right: 0;
+  /* Pink A100 */
+  background-color: #ff80ab;
+}
+#file_download_link:hover {
+  /* Pink A200 */
+  background-color: #ff4081;
+}
+#file_download_link p {
+  text-align: center;
+}
+
+#viewer {
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  margin-right: -320px;
+  position: relative;
+}
+#lab_wrapper {
+  position: relative;
+}
+#lab_wrapper .machine_area {
+  position: absolute;
+  display: block;
+  height: 30px;
+  width: 30px;
+  margin-top: -15px;
+  margin-left: -15px;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.5;
+  /* Pink A100 */
+  background-color: #ff80ab;
+  -moz-transition:    all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-ous;
+  -o-transition:      all 0.3s ease-in-ous;
+  -ms-transition:     all 0.3s ease-in-ous;
+  transition:         all 0.3s ease-in-ous;
+  -moz-transition-property:    opacity, background-color;
+  -webkit-transition-property: opacity, background-color;
+  -o-transition-property:      opacity, background-color;
+  -ms-transition-property:     opacity, background-color;
+  transition-property:         opacity, background-color;
+}
+#lab_wrapper .machine_area:hover {
+  opacity: 1.0;
+  /* Pink A200 */
+  background-color: #ff4081;
+}
+#lab_wrapper .machine_area img {
+  width: 24px;
+  margin: 3px;
+  opacity: 0;
+  -moz-transition:    opacity 0.3s ease-in-out;
+  -webkit-transition: opacity 0.3s ease-in-ous;
+  -o-transition:      opacity 0.3s ease-in-ous;
+  -ms-transition:     opacity 0.3s ease-in-ous;
+  transition:         opacity 0.3s ease-in-ous;
+}
+#lab_wrapper .machine_area:hover img {
+  opacity: 1;
+}
+#lab_wrapper .lab_image {
+  width: 100%;
+}
+
+#machine_panels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(0,0,0,0.5);
+  -moz-transition:    all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition:      all 0.3s ease-in-out;
+  -ms-transition:     all 0.3s ease-in-out;
+  transition:         all 0.3s ease-in-out;
+}
+.hidden_panel {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#machine_panels .machine_panel {
+  display: none;
+  width: 360px;
+  height: 450px;
+  position: absolute;
+  top: 50%;
+  margin-top: -225px;
+  left: 50%;
+  margin-left: -180px;
+  background-color: white;
+  overflow: hidden;
+  border-radius: 0.1rem;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+#machine_panels .machine_panel:hover {
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.8);
+}
+#machine_panels .machine_panel img {
+  width: auto;
+  max-height: 240px;
+  margin: 0 auto;
+  display: block;
+}
+#machine_panels .machine_panel .machine_panel_detail {
+  margin: 15px;
+}
+#machine_panels .machine_panel .machine_link {
+  position: absolute;
+  bottom: 0;
+  padding: 15px;
+  display: inline-block;
+  text-align: center;
+  width: 330px;
+  /* Teal #100 */
+  background-color: #b2dfdb;
+  -moz-transition:    background-color 0.3s ease-in-out;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  -o-transition:      background-color 0.3s ease-in-out;
+  -ms-transition:     background-color 0.3s ease-in-out;
+  transition:         background-color 0.3s ease-in-out;
+}
+#machine_panels .machine_panel .machine_link:hover {
+  /* Teal #200 */
+  background-color: #80cbc4;
+}
+
+/* CANVAS */
+#canvas_wrapper {
+  position: relative;
+  height: auto;
+  overflow: hidden;
+}
+canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.status {
+  color: gray;
+}
