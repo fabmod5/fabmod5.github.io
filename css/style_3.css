@@ -474,10 +474,10 @@ input[disabled], button[disabled] {
 #lab_wrapper .machine_area {
   position: absolute;
   display: block;
-  height: 30px;
-  width: 30px;
-  margin-top: -15px;
-  margin-left: -15px;
+  height: 50px;
+  width: 50px;
+  margin-top: -25px;
+  margin-left: -25px;
   border-radius: 50%;
   cursor: pointer;
   opacity: 0.5;
@@ -500,8 +500,8 @@ input[disabled], button[disabled] {
   background-color: #ff4081;
 }
 #lab_wrapper .machine_area img {
-  width: 24px;
-  margin: 3px;
+  width: 36px;
+  margin: 7px;
   opacity: 0;
   -moz-transition:    opacity 0.3s ease-in-out;
   -webkit-transition: opacity 0.3s ease-in-ous;

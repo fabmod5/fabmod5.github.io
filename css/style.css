@@ -385,7 +385,7 @@ button img,
 button svg {
   height: 24px;
   width: 24px;
-  margin: 6px;
+  margin: 9px;
   display: block;
 }
 .params_title button {
